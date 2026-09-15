@@ -706,6 +706,16 @@
       <mask>oRRS18to6v3</mask>
     </model_grid>
 
+    <model_grid alias="T574_MAB45to5rr1" compset="(DATM|SATM)">
+      <grid name="atm">T574</grid>
+      <grid name="lnd">null</grid>
+      <grid name="ocnice">MAB45to5rr1</grid>
+      <grid name="rof">null</grid>
+      <grid name="glc">null</grid>
+      <grid name="wav">null</grid>
+      <mask>MAB45to5rr1</mask>
+    </model_grid>
+
     <!-- finite volume grids -->
 
     <model_grid alias="f02_g16">
@@ -3330,6 +3340,14 @@
       <desc>TL319 is JRA lat/lon grid:</desc>
     </domain>
 
+    <domain name="T574">
+      <nx>1760</nx>
+      <ny>880</ny>
+      <file grid="atm|lnd" mask="MAB45to5rr1">$DIN_LOC_ROOT/share/domains/domain.lnd.T574_MAB45to5rr1.20260910.nc</file>
+      <file grid="ice|ocn" mask="MAB45to5rr1">$DIN_LOC_ROOT/share/domains/domain.ocn.T574_MAB45to5rr1.20260910.nc</file>
+      <desc>T574 is a CFSv2 lat/lon Gaussian grid:</desc>
+    </domain>
+
     <domain name="ERA5r025">
       <nx>1440</nx>
       <ny>721</ny>
@@ -3813,6 +3831,13 @@
       <ny>1</ny>
       <file grid="ice|ocn">$DIN_LOC_ROOT/share/domains/domain.ocn.SOwISC12to30E3r4.250122.nc</file>
       <desc>SOwISC12to30E3r4 is a MPAS ocean grid generated with the jigsaw/compass process using XXXXX. Additionally, it has ocean in ice-shelf cavities:</desc>
+    </domain>
+
+    <domain name="MAB45to5rr1">
+      <nx>2558828</nx>
+      <ny>1</ny>
+      <file grid="ice|ocn">$DIN_LOC_ROOT/share/domains/domain.ocn.MAB45to5rr1.20260910.nc</file>
+      <desc>MAB45to5rr1 is a MPAS ocean grid generated with the jigsaw/compass process using XXXXX. This mesh features a wetting-and-drying flood plain along the Mid-Atlanic Bight.</desc>
     </domain>
 
     <!-- ROF (river) grids-->
@@ -5785,6 +5810,13 @@
        <map name="ATM2LND_SMAPNAME">cpl/gridmaps/TL319/map_TL319_to_r05_trbilin.20240212.nc</map>
        <map name="LND2ATM_FMAPNAME">cpl/gridmaps/TL319/map_r05_to_TL319_traave.20240212.nc</map>
        <map name="LND2ATM_SMAPNAME">cpl/gridmaps/TL319/map_r05_to_TL319_traave.20240212.nc</map>
+    </gridmap>
+
+    <gridmap atm_grid="T574" ocn_grid="MAB45to5rr1">
+      <map name="ATM2OCN_FMAPNAME">cpl/gridmaps/T574/map_T574_to_MAB45to5rr1_traave.20260910.nc</map>
+      <map name="ATM2OCN_SMAPNAME">cpl/gridmaps/T574/map_T574_to_MAB45to5rr1_trbilin.20260910.nc</map>
+      <map name="OCN2ATM_FMAPNAME">cpl/gridmaps/MAB45to5rr1/map_MAB45to5rr1_to_T574_traave.20260910.nc</map>
+      <map name="OCN2ATM_SMAPNAME">cpl/gridmaps/MAB45to5rr1/map_MAB45to5rr1_to_T574_traave.20260910.nc</map>
     </gridmap>
 
     <gridmap atm_grid="ERA5r025" ocn_grid="IcoswISC30E3r5">
