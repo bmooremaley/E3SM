@@ -57,11 +57,14 @@
 <config_dt ocn_grid="RRSwISC6to18E3r5">'00:05:00'</config_dt>
 <config_dt ocn_grid="SOwISC12to30E3r3">'00:10:00'</config_dt>
 <config_dt ocn_grid="SOwISC12to30E3r4">'00:10:00'</config_dt>
+<config_dt ocn_grid="MAB45to5rr1">'00:00:10'</config_dt>
 <config_time_integrator>'split_explicit_ab2'</config_time_integrator>
+<config_time_integrator ocn_grid="MAB45to5rr1">'RK4'</config_time_integrator>
 <config_number_of_time_levels>2</config_number_of_time_levels>
 
 <!-- lateral_walls -->
 <config_wall_slip_factor>1.0</config_wall_slip_factor>
+<config_wall_slip_factor ocn_grid="MAB45to5rr1">0.0</config_wall_slip_factor>
 
 <!-- hmix -->
 <config_hmix_scaleWithMesh ocn_grid="oQU480">.false.</config_hmix_scaleWithMesh>
@@ -92,8 +95,10 @@
 <config_hmix_scaleWithMesh ocn_grid="RRSwISC6to18E3r5">.true.</config_hmix_scaleWithMesh>
 <config_hmix_scaleWithMesh ocn_grid="SOwISC12to30E3r3">.true.</config_hmix_scaleWithMesh>
 <config_hmix_scaleWithMesh ocn_grid="SOwISC12to30E3r4">.true.</config_hmix_scaleWithMesh>
+<config_hmix_scaleWithMesh ocn_grid="MAB45to5rr1">.true.</config_hmix_scaleWithMesh>
 <config_maxMeshDensity>-1.0</config_maxMeshDensity>
 <config_hmix_use_ref_cell_width>.false.</config_hmix_use_ref_cell_width>
+<config_hmix_use_ref_cell_width ocn_grid="MAB45to5rr1">.true.</config_hmix_use_ref_cell_width>
 <config_hmix_ref_cell_width>30.0e3</config_hmix_ref_cell_width>
 <config_apvm_scale_factor>0.0</config_apvm_scale_factor>
 
@@ -116,6 +121,7 @@
 <config_use_mom_del2 ocn_grid="RRSwISC6to18E3r5">.false.</config_use_mom_del2>
 <config_use_mom_del2 ocn_grid="SOwISC12to30E3r3">.true.</config_use_mom_del2>
 <config_use_mom_del2 ocn_grid="SOwISC12to30E3r4">.true.</config_use_mom_del2>
+<config_use_mom_del2 ocn_grid="MAB45to5rr1">.true.</config_use_mom_del2>
 <config_mom_del2>10.0</config_mom_del2>
 <config_mom_del2 ocn_grid="oEC60to30v3">1000.0</config_mom_del2>
 <config_mom_del2 ocn_grid="oEC60to30v3wLI">1000.0</config_mom_del2>
@@ -134,6 +140,7 @@
 <config_mom_del2 ocn_grid="RRSwISC6to18E3r5">0.0</config_mom_del2>
 <config_mom_del2 ocn_grid="SOwISC12to30E3r3">462.0</config_mom_del2>
 <config_mom_del2 ocn_grid="SOwISC12to30E3r4">462.0</config_mom_del2>
+<config_mom_del2 ocn_grid="MAB45to5rr1">10.0</config_mom_del2>
 <config_use_tracer_del2>.false.</config_use_tracer_del2>
 <config_tracer_del2>10.0</config_tracer_del2>
 
@@ -167,6 +174,7 @@
 <config_mom_del4 ocn_grid="RRSwISC6to18E3r5">3.2e09</config_mom_del4>
 <config_mom_del4 ocn_grid="SOwISC12to30E3r3">1.18e10</config_mom_del4>
 <config_mom_del4 ocn_grid="SOwISC12to30E3r4">1.18e10</config_mom_del4>
+<config_mom_del4 ocn_grid="MAB45to5rr1">3.333e10</config_mom_del4>
 <config_mom_del4_div_factor>1.0</config_mom_del4_div_factor>
 <config_mom_del4_div_factor ocn_grid="RRSwISC6to18E3r5">10.0</config_mom_del4_div_factor>
 <config_use_tracer_del4>.false.</config_use_tracer_del4>
@@ -211,6 +219,7 @@
 <config_Redi_horizontal_taper ocn_grid="FRISwISC01to60E3r1">'RossbyRadius'</config_Redi_horizontal_taper>
 <config_Redi_horizontal_taper ocn_grid="SOwISC12to30E3r3">'RossbyRadius'</config_Redi_horizontal_taper>
 <config_Redi_horizontal_taper ocn_grid="SOwISC12to30E3r4">'RossbyRadius'</config_Redi_horizontal_taper>
+<config_Redi_horizontal_taper ocn_grid="MAB45to5rr1">'ramp'</config_Redi_horizontal_taper>
 <config_Redi_horizontal_ramp_min>20e3</config_Redi_horizontal_ramp_min>
 <config_Redi_horizontal_ramp_min ocn_grid="WCAtl12to45E2r4">30e3</config_Redi_horizontal_ramp_min>
 <config_Redi_horizontal_ramp_max>30e3</config_Redi_horizontal_ramp_max>
@@ -244,6 +253,7 @@
 <config_GM_closure ocn_grid="FRISwISC01to60E3r1">'N2_dependent'</config_GM_closure>
 <config_GM_closure ocn_grid="SOwISC12to30E3r3">'N2_dependent'</config_GM_closure>
 <config_GM_closure ocn_grid="SOwISC12to30E3r4">'N2_dependent'</config_GM_closure>
+<config_GM_closure ocn_grid="MAB45to5rr1">'EdenGreatbatch'</config_GM_closure>
 <config_GM_constant_kappa>900.0</config_GM_constant_kappa>
 <config_GM_constant_kappa ocn_forcing="datm_forced_restoring" ocn_grid="oEC60to30v3wLI">600.0</config_GM_constant_kappa>
 <config_GM_constant_kappa ocn_forcing="datm_forced_restoring" ocn_grid="ECwISC30to60E1r2">600.0</config_GM_constant_kappa>
@@ -260,6 +270,7 @@
 <config_GM_constant_kappa ocn_forcing="datm_forced_restoring" ocn_grid="FRISwISC01to60E3r1">600.0</config_GM_constant_kappa>
 <config_GM_constant_kappa ocn_forcing="datm_forced_restoring" ocn_grid="SOwISC12to30E3r3">600.0</config_GM_constant_kappa>
 <config_GM_constant_kappa ocn_forcing="datm_forced_restoring" ocn_grid="SOwISC12to30E3r4">600.0</config_GM_constant_kappa>
+<config_GM_constant_kappa ocn_forcing="datm_forced_restoring" ocn_grid="MAB45to5rr1">600.0</config_GM_constant_kappa>
 <config_GM_constant_bclModeSpeed>0.3</config_GM_constant_bclModeSpeed>
 <config_GM_minBclModeSpeed_method>'constant'</config_GM_minBclModeSpeed_method>
 <config_GM_spatially_variable_min_kappa>300.0</config_GM_spatially_variable_min_kappa>
@@ -275,6 +286,7 @@
 <config_GM_spatially_variable_baroclinic_mode ocn_grid="FRISwISC01to60E3r1">1.0</config_GM_spatially_variable_baroclinic_mode>
 <config_GM_spatially_variable_baroclinic_mode ocn_grid="SOwISC12to30E3r3">1.0</config_GM_spatially_variable_baroclinic_mode>
 <config_GM_spatially_variable_baroclinic_mode ocn_grid="SOwISC12to30E3r4">1.0</config_GM_spatially_variable_baroclinic_mode>
+<config_GM_spatially_variable_baroclinic_mode ocn_grid="MAB45to5rr1">1.0</config_GM_spatially_variable_baroclinic_mode>
 <config_GM_Visbeck_alpha>0.13</config_GM_Visbeck_alpha>
 <config_GM_Visbeck_max_depth>1000.0</config_GM_Visbeck_max_depth>
 <config_GM_EG_riMin>200.0</config_GM_EG_riMin>
@@ -297,6 +309,7 @@
 <config_GM_horizontal_taper ocn_grid="FRISwISC01to60E3r1">'RossbyRadius'</config_GM_horizontal_taper>
 <config_GM_horizontal_taper ocn_grid="SOwISC12to30E3r3">'RossbyRadius'</config_GM_horizontal_taper>
 <config_GM_horizontal_taper ocn_grid="SOwISC12to30E3r4">'RossbyRadius'</config_GM_horizontal_taper>
+<config_GM_horizontal_taper ocn_grid="MAB45to5rr1">'ramp'</config_GM_horizontal_taper>
 <config_GM_horizontal_ramp_min>20e3</config_GM_horizontal_ramp_min>
 <config_GM_horizontal_ramp_min ocn_grid="WCAtl12to45E2r4">30e3</config_GM_horizontal_ramp_min>
 <config_GM_horizontal_ramp_max>30e3</config_GM_horizontal_ramp_max>
@@ -317,6 +330,7 @@
 
 <!-- cvmix -->
 <config_use_cvmix>.true.</config_use_cvmix>
+<config_use_cvmix ocn_grid="MAB45to5rr1">.false.</config_use_cvmix>
 <config_cvmix_prandtl_number>1.0</config_cvmix_prandtl_number>
 <config_cvmix_background_scheme>'constant'</config_cvmix_background_scheme>
 <config_cvmix_background_scheme ocn_grid="SOwISC12to30E3r3">'latitude-dependent'</config_cvmix_background_scheme>
@@ -386,6 +400,7 @@
 
 <!-- forcing -->
 <config_use_variable_drag>.false.</config_use_variable_drag>
+<config_use_variable_drag ocn_grid="MAB45to5rr1">.true.</config_use_variable_drag>
 <config_use_bulk_wind_stress>.true.</config_use_bulk_wind_stress>
 <config_bulk_wind_stress_interp_isotropic>.true.</config_bulk_wind_stress_interp_isotropic>
 <config_use_bulk_thickness_flux>.true.</config_use_bulk_thickness_flux>
@@ -424,6 +439,7 @@
 
 <!-- self_attraction_loading -->
 <config_use_self_attraction_loading>.false.</config_use_self_attraction_loading>
+<config_use_self_attraction_loading ocn_grid="MAB45to5rr1">.true.</config_use_self_attraction_loading>
 <config_self_attraction_loading_depth_cutoff>10.0</config_self_attraction_loading_depth_cutoff>
 <config_mpas_to_grid_weights_file>'mpas_to_grid.nc'</config_mpas_to_grid_weights_file>
 <config_grid_to_mpas_weights_file>'grid_to_mpas.nc'</config_grid_to_mpas_weights_file>
@@ -431,12 +447,14 @@
 <config_nLatitude>128</config_nLatitude>
 <config_nLongitude>256</config_nLongitude>
 <config_use_parallel_self_attraction_loading>.false.</config_use_parallel_self_attraction_loading>
+<config_use_parallel_self_attraction_loading ocn_grid="MAB45to5rr1">.true.</config_use_parallel_self_attraction_loading>
 <config_parallel_self_attraction_loading_order>10</config_parallel_self_attraction_loading_order>
 <config_parallel_self_attraction_loading_n_cells_per_block>600</config_parallel_self_attraction_loading_n_cells_per_block>
 <config_parallel_self_attraction_loading_bfb>.true.</config_parallel_self_attraction_loading_bfb>
 
 <!-- tidal_potential_forcing -->
 <config_use_tidal_potential_forcing>.false.</config_use_tidal_potential_forcing>
+<config_use_tidal_potential_forcing ocn_grid="MAB45to5rr1">.true.</config_use_tidal_potential_forcing>
 <config_tidal_potential_reference_time>'0001-01-01_00:00:00'</config_tidal_potential_reference_time>
 <config_use_tidal_potential_forcing_M2>.true.</config_use_tidal_potential_forcing_M2>
 <config_use_tidal_potential_forcing_S2>.true.</config_use_tidal_potential_forcing_S2>
@@ -448,9 +466,11 @@
 <config_use_tidal_potential_forcing_P1>.true.</config_use_tidal_potential_forcing_P1>
 <config_tidal_potential_ramp>10.0</config_tidal_potential_ramp>
 <config_self_attraction_and_loading_beta>0.09</config_self_attraction_and_loading_beta>
+<config_self_attraction_and_loading_beta ocn_grid="MAB45to5rr1">0.0</config_self_attraction_and_loading_beta>
 
 <!-- frazil_ice -->
 <config_use_frazil_ice_formation>.true.</config_use_frazil_ice_formation>
+<config_use_frazil_ice_formation ocn_grid="MAB45to5rr1">.false.</config_use_frazil_ice_formation>
 <config_frazil_in_open_ocean>.true.</config_frazil_in_open_ocean>
 <config_frazil_under_land_ice>.false.</config_frazil_under_land_ice>
 <config_frazil_heat_of_fusion>3.337e5</config_frazil_heat_of_fusion>
@@ -495,6 +515,7 @@
 <config_land_ice_flux_mode ocn_grid="RRSwISC6to18E3r5">'pressure_only'</config_land_ice_flux_mode>
 <config_land_ice_flux_mode ocn_grid="SOwISC12to30E3r3">'pressure_only'</config_land_ice_flux_mode>
 <config_land_ice_flux_mode ocn_grid="SOwISC12to30E3r4">'pressure_only'</config_land_ice_flux_mode>
+<config_land_ice_flux_mode ocn_grid="MAB45to5rr1">'pressure_only'</config_land_ice_flux_mode>
 <config_land_ice_flux_formulation>'Jenkins'</config_land_ice_flux_formulation>
 <config_land_ice_flux_useHollandJenkinsAdvDiff>.false.</config_land_ice_flux_useHollandJenkinsAdvDiff>
 <config_land_ice_flux_attenuation_coefficient>10.0</config_land_ice_flux_attenuation_coefficient>
@@ -516,6 +537,7 @@
 <config_land_ice_flux_explicit_topDragCoeff ocn_grid="RRSwISC6to18E3r5">4.48e-3</config_land_ice_flux_explicit_topDragCoeff>
 <config_land_ice_flux_explicit_topDragCoeff ocn_grid="SOwISC12to30E3r3">4.48e-3</config_land_ice_flux_explicit_topDragCoeff>
 <config_land_ice_flux_explicit_topDragCoeff ocn_grid="SOwISC12to30E3r4">4.48e-3</config_land_ice_flux_explicit_topDragCoeff>
+<config_land_ice_flux_explicit_topDragCoeff ocn_grid="MAB45to5rr1">2.5e-3</config_land_ice_flux_explicit_topDragCoeff>
 <config_land_ice_flux_ISOMIP_gammaT>1e-4</config_land_ice_flux_ISOMIP_gammaT>
 <config_land_ice_flux_jenkins_heat_transfer_coefficient>0.011</config_land_ice_flux_jenkins_heat_transfer_coefficient>
 <config_land_ice_flux_jenkins_heat_transfer_coefficient ocn_grid="oEC60to30v3wLI">0.00295</config_land_ice_flux_jenkins_heat_transfer_coefficient>
@@ -531,6 +553,7 @@
 <config_land_ice_flux_jenkins_heat_transfer_coefficient ocn_grid="RRSwISC6to18E3r5">0.00295</config_land_ice_flux_jenkins_heat_transfer_coefficient>
 <config_land_ice_flux_jenkins_heat_transfer_coefficient ocn_grid="SOwISC12to30E3r3">0.00295</config_land_ice_flux_jenkins_heat_transfer_coefficient>
 <config_land_ice_flux_jenkins_heat_transfer_coefficient ocn_grid="SOwISC12to30E3r4">0.00295</config_land_ice_flux_jenkins_heat_transfer_coefficient>
+<config_land_ice_flux_jenkins_heat_transfer_coefficient ocn_grid="MAB45to5rr1">0.011</config_land_ice_flux_jenkins_heat_transfer_coefficient>
 <config_land_ice_flux_jenkins_salt_transfer_coefficient>3.1e-4</config_land_ice_flux_jenkins_salt_transfer_coefficient>
 <config_land_ice_flux_jenkins_salt_transfer_coefficient ocn_grid="oEC60to30v3wLI">8.42e-5</config_land_ice_flux_jenkins_salt_transfer_coefficient>
 <config_land_ice_flux_jenkins_salt_transfer_coefficient ocn_grid="ECwISC30to60E1r2">8.42e-5</config_land_ice_flux_jenkins_salt_transfer_coefficient>
@@ -545,6 +568,7 @@
 <config_land_ice_flux_jenkins_salt_transfer_coefficient ocn_grid="RRSwISC6to18E3r5">8.42e-5</config_land_ice_flux_jenkins_salt_transfer_coefficient>
 <config_land_ice_flux_jenkins_salt_transfer_coefficient ocn_grid="SOwISC12to30E3r3">8.42e-5</config_land_ice_flux_jenkins_salt_transfer_coefficient>
 <config_land_ice_flux_jenkins_salt_transfer_coefficient ocn_grid="SOwISC12to30E3r4">8.42e-5</config_land_ice_flux_jenkins_salt_transfer_coefficient>
+<config_land_ice_flux_jenkins_salt_transfer_coefficient ocn_grid="MAB45to5rr1">3.1e-4</config_land_ice_flux_jenkins_salt_transfer_coefficient>
 <config_land_ice_flux_tidal_Jourdain_alpha>1.0</config_land_ice_flux_tidal_Jourdain_alpha>
 <config_land_ice_flux_tidal_Jourdain_A0>0.0</config_land_ice_flux_tidal_Jourdain_A0>
 <config_land_ice_flux_tidal_Jourdain_U0>5e-2</config_land_ice_flux_tidal_Jourdain_U0>
@@ -559,6 +583,7 @@
 <config_flux_limiter>'monotonic'</config_flux_limiter>
 <config_remap_limiter>'monotonic'</config_remap_limiter>
 <config_thickness_flux_type>'centered'</config_thickness_flux_type>
+<config_thickness_flux_type ocn_grid="MAB45to5rr1">'upwind'</config_thickness_flux_type>
 <config_use_spatially_variable_upwind>.false.</config_use_spatially_variable_upwind>
 <config_spatially_variable_upwind_hmin>5.0</config_spatially_variable_upwind_hmin>
 <config_spatially_variable_upwind_hmax>10.0</config_spatially_variable_upwind_hmax>
@@ -566,6 +591,7 @@
 <!-- bottom_drag -->
 <config_bottom_drag_mode>'implicit'</config_bottom_drag_mode>
 <config_implicit_bottom_drag_type>'constant'</config_implicit_bottom_drag_type>
+<config_implicit_bottom_drag_type ocn_grid="MAB45to5rr1">'mannings'</config_implicit_bottom_drag_type>
 <config_implicit_constant_bottom_drag_coeff>1.0e-3</config_implicit_constant_bottom_drag_coeff>
 <config_use_implicit_top_drag>.false.</config_use_implicit_top_drag>
 <config_implicit_top_drag_coeff>2.5e-3</config_implicit_top_drag_coeff>
@@ -582,12 +608,14 @@
 <config_implicit_top_drag_coeff ocn_grid="RRSwISC6to18E3r5">4.48e-3</config_implicit_top_drag_coeff>
 <config_implicit_top_drag_coeff ocn_grid="SOwISC12to30E3r3">4.48e-3</config_implicit_top_drag_coeff>
 <config_implicit_top_drag_coeff ocn_grid="SOwISC12to30E3r4">4.48e-3</config_implicit_top_drag_coeff>
+<config_implicit_top_drag_coeff ocn_grid="MAB45to5rr1">1.0e-3</config_implicit_top_drag_coeff>
 <config_loglaw_bottom_roughness>1.0e-3</config_loglaw_bottom_roughness>
 <config_loglaw_layer_depth_max>10.0</config_loglaw_layer_depth_max>
 <config_loglaw_bottom_drag_min>2.5e-3</config_loglaw_bottom_drag_min>
 <config_loglaw_bottom_drag_max>1.0e-1</config_loglaw_bottom_drag_max>
 <config_explicit_bottom_drag_coeff>1.0e-3</config_explicit_bottom_drag_coeff>
 <config_use_topographic_wave_drag>.false.</config_use_topographic_wave_drag>
+<config_use_topographic_wave_drag ocn_grid="MAB45to5rr1">.true.</config_use_topographic_wave_drag>
 <config_topographic_wave_drag_scheme>'ZAE'</config_topographic_wave_drag_scheme>
 <config_topographic_wave_drag_coeff>5.0e-4</config_topographic_wave_drag_coeff>
 <config_thickness_drag_type>'centered'</config_thickness_drag_type>
@@ -604,11 +632,34 @@
 <config_use_vegetation_drag>.false.</config_use_vegetation_drag>
 <config_vegetation_drag_coefficient>1.09</config_vegetation_drag_coefficient>
 
+<!-- wetting_drying -->
+<config_use_wetting_drying>.false.</config_use_wetting_drying>
+<config_use_wetting_drying ocn_grid="MAB45to5rr1">.true.</config_use_wetting_drying>
+<config_prevent_drying>.false.</config_prevent_drying>
+<config_prevent_drying ocn_grid="MAB45to5rr1">.true.</config_prevent_drying>
+<config_drying_min_cell_height>1.0e-3</config_drying_min_cell_height>
+<config_drying_min_cell_height ocn_grid="MAB45to5rr1">0.01</config_drying_min_cell_height>
+<config_zero_drying_velocity>.false.</config_zero_drying_velocity>
+<config_zero_drying_velocity ocn_grid="MAB45to5rr1">.true.</config_zero_drying_velocity>
+<config_zero_drying_velocity_ramp>.false.</config_zero_drying_velocity_ramp>
+<config_zero_drying_velocity_ramp ocn_grid="MAB45to5rr1">.true.</config_zero_drying_velocity_ramp>
+<config_zero_drying_velocity_ramp_hmin>1e-3</config_zero_drying_velocity_ramp_hmin>
+<config_zero_drying_velocity_ramp_hmin ocn_grid="MAB45to5rr1">1e-2</config_zero_drying_velocity_ramp_hmin>
+<config_zero_drying_velocity_ramp_hmax>2e-3</config_zero_drying_velocity_ramp_hmax>
+<config_zero_drying_velocity_ramp_hmax ocn_grid="MAB45to5rr1">2e-2</config_zero_drying_velocity_ramp_hmax>
+<config_verify_not_dry>.false.</config_verify_not_dry>
+<config_drying_safety_height>1.0e-10</config_drying_safety_height>
+<config_use_subgrid_wetting_drying>.false.</config_use_subgrid_wetting_drying>
+<config_use_subgrid_wetting_drying ocn_grid="MAB45to5rr1">.true.</config_use_subgrid_wetting_drying>
+<config_use_ssh_gradient_wetting_drying>.false.</config_use_ssh_gradient_wetting_drying>
+<config_use_ssh_gradient_wetting_drying ocn_grid="MAB45to5rr1">.true.</config_use_ssh_gradient_wetting_drying>
+
 <!-- ocean_constants -->
 <config_density0>1026.0</config_density0>
 
 <!-- pressure_gradient -->
 <config_pressure_gradient_type>'Jacobian_from_TS'</config_pressure_gradient_type>
+<config_pressure_gradient_type ocn_grid="MAB45to5rr1">'ssh_gradient'</config_pressure_gradient_type>
 <config_common_level_weight>0.5</config_common_level_weight>
 <config_zonal_ssh_grad>0.0</config_zonal_ssh_grad>
 <config_meridional_ssh_grad>0.0</config_meridional_ssh_grad>
@@ -671,6 +722,7 @@
 <config_btr_dt ocn_grid="RRSwISC6to18E3r5">'0000_00:00:05'</config_btr_dt>
 <config_btr_dt ocn_grid="SOwISC12to30E3r3">'0000_00:00:15'</config_btr_dt>
 <config_btr_dt ocn_grid="SOwISC12to30E3r4">'0000_00:00:15'</config_btr_dt>
+<config_btr_dt ocn_grid="MAB45to5rr1">'0000_00:00:15'</config_btr_dt>
 <config_n_btr_cor_iter>2</config_n_btr_cor_iter>
 <config_vel_correction>.true.</config_vel_correction>
 <config_btr_subcycle_loop_factor>2</config_btr_subcycle_loop_factor>
@@ -721,6 +773,7 @@
 <config_check_ssh_consistency ocn_grid="RRSwISC6to18E3r5">.false.</config_check_ssh_consistency>
 <config_check_ssh_consistency ocn_grid="SOwISC12to30E3r3">.false.</config_check_ssh_consistency>
 <config_check_ssh_consistency ocn_grid="SOwISC12to30E3r4">.false.</config_check_ssh_consistency>
+<config_check_ssh_consistency ocn_grid="MAB45to5rr1">.true.</config_check_ssh_consistency>
 <config_filter_btr_mode>.false.</config_filter_btr_mode>
 <config_prescribe_velocity>.false.</config_prescribe_velocity>
 <config_prescribe_thickness>.false.</config_prescribe_thickness>
@@ -730,7 +783,9 @@
 <config_disable_thick_all_tend>.false.</config_disable_thick_all_tend>
 <config_disable_thick_hadv>.false.</config_disable_thick_hadv>
 <config_disable_thick_vadv>.false.</config_disable_thick_vadv>
+<config_disable_thick_vadv ocn_grid="MAB45to5rr1">.true.</config_disable_thick_vadv>
 <config_disable_thick_sflux>.false.</config_disable_thick_sflux>
+<config_disable_thick_sflux ocn_grid="MAB45to5rr1">.true.</config_disable_thick_sflux>
 <config_disable_vel_all_tend>.false.</config_disable_vel_all_tend>
 <config_disable_vel_hadv>.false.</config_disable_vel_hadv>
 <config_disable_vel_coriolis>.false.</config_disable_vel_coriolis>
@@ -739,9 +794,12 @@
 <config_disable_vel_surface_stress>.false.</config_disable_vel_surface_stress>
 <config_disable_vel_topographic_wave_drag>.false.</config_disable_vel_topographic_wave_drag>
 <config_disable_vel_explicit_bottom_drag>.false.</config_disable_vel_explicit_bottom_drag>
+<config_disable_vel_explicit_bottom_drag ocn_grid="MAB45to5rr1">.true.</config_disable_vel_explicit_bottom_drag>
 <config_disable_vel_vmix>.false.</config_disable_vel_vmix>
 <config_disable_vel_vadv>.false.</config_disable_vel_vadv>
+<config_disable_vel_vadv ocn_grid="MAB45to5rr1">.true.</config_disable_vel_vadv>
 <config_disable_tr_all_tend>.false.</config_disable_tr_all_tend>
+<config_disable_tr_all_tend ocn_grid="MAB45to5rr1">.true.</config_disable_tr_all_tend>
 <config_disable_tr_adv>.false.</config_disable_tr_adv>
 <config_disable_tr_hmix>.false.</config_disable_tr_hmix>
 <config_disable_tr_vmix>.false.</config_disable_tr_vmix>
