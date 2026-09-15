@@ -28,6 +28,12 @@
   </compset>
 
   <compset>
+    <alias>CMPASO-CFSv2</alias>
+    <lname>2000_DATM%CFSv2_SLND_SICE_MPASO%DATMFORCED_SROF_SGLC_SWAV</lname>
+    <support_level>Experimental, under development</support_level>
+  </compset>
+
+  <compset>
     <alias>GMPAS-NYF</alias>
     <lname>2000_DATM%NYF_SLND_MPASSI_MPASO%DATMFORCED_DROF%NYF_SGLC_SWAV</lname>
   </compset>
