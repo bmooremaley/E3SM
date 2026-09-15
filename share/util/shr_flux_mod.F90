@@ -34,6 +34,7 @@ module shr_flux_mod
    public :: shr_flux_atmOcn_diurnal   ! computes atm/ocn fluxes with diurnal cycle
    public :: shr_flux_atmOcn_UA   ! computes atm/ocn fluxes using University of
                                   ! Arizona algorithm (Zeng et al., 1998)
+   public :: shr_flux_atmOcn_CFS  ! computes atm/ocn wind stress for CFS forcing
    public :: shr_flux_atmIce      ! computes atm/ice fluxes
    public :: shr_flux_MOstability ! boundary layer stability scales/functions
    public :: shr_flux_adjust_constants ! adjust constant values used in flux calculations.
@@ -2101,6 +2102,54 @@ SUBROUTINE shr_flux_atmOcn_diurnal &
    ENDDO ! end n loop
 
 END subroutine shr_flux_atmOcn_diurnal
+
+!===============================================================================
+!BOP ===========================================================================
+!
+! !IROUTINE: shr_flux_atmOcn_CFS -- computes atm/ocn wind stress for CFS forcing
+!
+! !DESCRIPTION:
+!    Computes wind stress for CFS forcing of barotropic storm surge configura-
+!    tions using the Garratt (1977) drag coefficient applied to 10m winds
+!    relative to the ocean surface. Incompatible with the diurnal cycle option.
+!
+! !REVISION HISTORY:
+!    2026-Sep - B. Moore-Maley - first version
+!
+! !INTERFACE: ------------------------------------------------------------------
+
+subroutine shr_flux_atmOcn_CFS(nMax, ubot, vbot, us, vs, mask, taux, tauy, duu10n, u10n)
+
+   integer(IN), intent(in)  :: nMax       ! number of grid cells
+   real(R8),    intent(in)  :: ubot  (:)  ! atm velocity, zonal      (m/s)
+   real(R8),    intent(in)  :: vbot  (:)  ! atm velocity, meridional (m/s)
+   real(R8),    intent(in)  :: us    (:)  ! ocn velocity, zonal      (m/s)
+   real(R8),    intent(in)  :: vs    (:)  ! ocn velocity, meridional (m/s)
+   integer(IN), intent(in)  :: mask  (:)  ! ocean mask (0 = inactive)
+   real(R8),    intent(out) :: taux  (:)  ! wind stress, zonal       (N/m2)
+   real(R8),    intent(out) :: tauy  (:)  ! wind stress, meridional  (N/m2)
+   real(R8),    intent(out) :: duu10n(:)  ! 10m wind speed squared   (m2/s2)
+   real(R8),    intent(out) :: u10n  (:)  ! 10m wind speed           (m/s)
+
+   integer(IN) :: n
+   real(R8)    :: urel, vrel, vmag, Cd
+   real(R8), parameter :: rhoAir  = SHR_CONST_RHODAIR  ! air density at STP  (kg/m3)
+   real(R8), parameter :: CdLimit = 0.0025_R8          ! Cd cap (Donelan et al., 2004)
+
+   do n = 1, nMax
+      if (mask(n) /= 0) then
+         urel      = ubot(n) - us(n)
+         vrel      = vbot(n) - vs(n)
+         vmag      = sqrt(urel**2 + vrel**2)
+         Cd        = min((0.75_R8 + 0.067_R8 * vmag) * 1.0e-3_R8, CdLimit)  ! Garratt 1977
+         taux(n)   = rhoAir * Cd * vmag * urel
+         tauy(n)   = rhoAir * Cd * vmag * vrel
+         duu10n(n) = vmag**2
+         u10n(n)   = vmag
+      end if
+   end do
+
+end subroutine shr_flux_atmOcn_CFS
 
 !===============================================================================
 !BOP ===========================================================================
