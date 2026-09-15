@@ -60,6 +60,8 @@
     co2tseries		= Time series of prescribed CO2 forcing
     Anomaly.Forcing	= Time series of correction terms
     BC			= Bias Correction for a stream to a given set of observations
+    CFSv2   = CFS intra-annual year forcing, v2, 2011-2013 (for forcing tropical cyclones)
+    CFSR    = CFS intra-annual year forcing, v1 reanalysis, no data (for forcing tropical cyclones)
 
     Anomaly.Forcing.Humidity
     Anomaly.Forcing.Longwave
@@ -228,6 +230,14 @@
     topo.e3smwcv2
     topo.cplwch
 
+    CFSv2.NCEP.PRATE
+    CFSv2.NCEP.PRESSFC
+    CFSv2.NCEP.WND10M
+
+    CFSR.NCEP.PRATE
+    CFSR.NCEP.PRESSFC
+    CFSR.NCEP.WND10M
+
       **********IMPORTANT NOTE: *************
       In the value matches below, regular expressions are used ****
       If two matches are equivalent, the FIRST one will be used, so need to make sure
@@ -277,8 +287,8 @@
       <value datm_mode="CORE_RYF0304_JRA" >CORE_RYF0304_JRA.GISS.LWDN,CORE_RYF0304_JRA.GISS.SWDN,CORE_RYF0304_JRA.GCGCS,CORE_RYF0304_JRA.NCEP</value>
       <value datm_mode="CORE2_IAF" atm_grid="01col" >CORE2_IAF.NCEP.DENS.SOFS,CORE2_IAF.NCEP.PSLV.SOFS,CORE2_IAF.PREC.SOFS.DAILY,CORE2_IAF.LWDN.SOFS.DAILY,CORE2_IAF.SWDN.SOFS.DAILY,CORE2_IAF.SWUP.SOFS.DAILY,CORE2_IAF.SHUM.SOFS.6HOUR,CORE2_IAF.TBOT.SOFS.6HOUR,CORE2_IAF.U.SOFS.6HOUR,CORE2_IAF.V.SOFS.6HOUR,CORE2_IAF.CORE2.ArcFactor</value>
       <value datm_mode="CPLHIST">CPLHISTForcing.Solar,CPLHISTForcing.nonSolarFlux,CPLHISTForcing.State3hr,CPLHISTForcing.State1hr</value>
-      <value datm_mode="CFSv2">CFSv2.UV</value>
-      <value datm_mode="CFSR">CFSR.UV</value>
+      <value datm_mode="CFSv2">CFSv2.NCEP.PRATE,CFSv2.NCEP.PRESSFC,CFSv2.NCEP.WND10M</value>
+      <value datm_mode="CFSR">CFSR.NCEP.PRATE,CFSR.NCEP.PRESSFC,CFSR.NCEP.WND10M</value>
       <value datm_mode="E3SMWCv2">E3SMWCv2Forcing.Solar,E3SMWCv2Forcing.nonSolarFlux,E3SMWCv2Forcing.State3hr,E3SMWCv2Forcing.State1hr</value>
       <value datm_mode="CPLWCH">CPLWCHForcing.Solar,CPLWCHForcing.nonSolarFlux,CPLWCHForcing.State3hr,CPLWCHForcing.State1hr</value>
     </values>   
@@ -352,8 +362,8 @@
       <value stream="presaero.SSP">$DIN_LOC_ROOT/atm/cam/chem/trop_mozart_aero/aero</value>
       <value stream="topo.observed">$DIN_LOC_ROOT/atm/datm7/topo_forcing</value>
       <value stream="topo.cplhist">null</value>
-      <value stream="CFSv2.UV">$DIN_LOC_ROOT/wav/cfsv2</value>
-      <value stream="CFSR.UV">$DIN_LOC_ROOT/wav/cfsr</value>
+      <value stream="CFSv2.*">$DIN_LOC_ROOT/atm/datm7</value>
+      <value stream="CFSR.*">$DIN_LOC_ROOT/atm/datm7</value>
       <value stream="topo.e3smwcv2">null</value>
       <value stream="topo.cplwch">null</value>
     </values>
@@ -473,8 +483,8 @@
       <value stream="presaero.SSP5-8.5">aerodep_clm_SSP585_b.e21.BSSP585cmip6.f09_g17.CMIP6-SSP5-8.5.001_2014-2101_monthly_0.9x1.25_c190419.nc</value>
       <value stream="topo.observed">topodata_0.9x1.25_USGS_070110_stream_c151201.nc</value>
       <value stream="topo.cplhist">null</value>
-      <value stream="CFSv2.UV">domain.ocn.CFSv2_CFSv2.200616.nc</value>
-      <value stream="CFSR.UV">domain.ocn.CFSR_CFSR.210415.nc</value>
+      <value stream="CFSv2.*">domain.T574.20260910.nc</value>
+      <value stream="CFSR.*">null</value>
       <value stream="topo.e3smwcv2">null</value>
       <value stream="topo.cplwch">null</value>
     </values>
@@ -640,8 +650,8 @@
       <value stream="presaero">$DIN_LOC_ROOT/atm/cam/chem/trop_mozart_aero/aero</value>
       <value stream="topo.observed">$DIN_LOC_ROOT/atm/datm7/topo_forcing</value>
       <value stream="topo.cplhist">$DATM_CPLHIST_DIR</value>
-      <value stream="CFSv2.UV">$DIN_LOC_ROOT/wav/cfsv2</value>
-      <value stream="CFSR.UV">$DIN_LOC_ROOT/wav/cfsr</value>
+      <value stream="CFSv2.*">$DIN_LOC_ROOT/ocn/cfs/cfsv2</value>
+      <value stream="CFSR.*">$DIN_LOC_ROOT/ocn/cfs/cfsr</value>
       <value stream="topo.e3smwcv2">$DIN_LOC_ROOT_CLMFORC/v2.LR.piControl_land/3hrly_drivers</value>
       <value stream="topo.cplwch">$DIN_LOC_ROOT_CLMFORC/v2.LR.historical_land/3hrly_drivers</value>
     </values>
@@ -1554,8 +1564,123 @@
       <value stream="presaero.SSP5-3.4">null</value>
       <value stream="presaero.SSP5-8.5">aerodep_clm_SSP585_b.e21.BSSP585cmip6.f09_g17.CMIP6-SSP5-8.5.001_2014-2101_monthly_0.9x1.25_c190419.nc</value>
       <value stream="topo.observed">topodata_0.9x1.25_USGS_070110_stream_c151201.nc</value>
-      <value stream="CFSv2.UV">sandy_wnd10m_ww3.nc</value>
-      <value stream="CFSR.UV">wnd10mx0.5.gdas.200506.ww3.nc</value>
+      <value stream="CFSv2.NCEP.PRATE">
+        prate.gdas.201101.grb2.nc
+        prate.gdas.201102.grb2.nc
+        prate.gdas.201103.grb2.nc
+        prate.cdas1.201104.grb2.nc
+        prate.cdas1.201105.grb2.nc
+        prate.cdas1.201106.grb2.nc
+        prate.cdas1.201107.grb2.nc
+        prate.cdas1.201108.grb2.nc
+        prate.cdas1.201109.grb2.nc
+        prate.cdas1.201110.grb2.nc
+        prate.cdas1.201111.grb2.nc
+        prate.cdas1.201112.grb2.nc
+        prate.cdas1.201201.grb2.nc
+        prate.cdas1.201202.grb2.nc
+        prate.cdas1.201203.grb2.nc
+        prate.cdas1.201204.grb2.nc
+        prate.cdas1.201205.grb2.nc
+        prate.cdas1.201206.grb2.nc
+        prate.cdas1.201207.grb2.nc
+        prate.cdas1.201208.grb2.nc
+        prate.cdas1.201209.grb2.nc
+        prate.cdas1.201210.grb2.nc
+        prate.cdas1.201211.grb2.nc
+        prate.cdas1.201212.grb2.nc
+        prate.cdas1.201301.grb2.nc
+        prate.cdas1.201302.grb2.nc
+        prate.cdas1.201303.grb2.nc
+        prate.cdas1.201304.grb2.nc
+        prate.cdas1.201305.grb2.nc
+        prate.cdas1.201306.grb2.nc
+        prate.cdas1.201307.grb2.nc
+        prate.cdas1.201308.grb2.nc
+        prate.cdas1.201309.grb2.nc
+        prate.cdas1.201310.grb2.nc
+        prate.cdas1.201311.grb2.nc
+        prate.cdas1.201312.grb2.nc
+      </value>
+      <value stream="CFSv2.NCEP.PRESSFC">
+        pressfc.gdas.201101.grb2.nc
+        pressfc.gdas.201102.grb2.nc
+        pressfc.gdas.201103.grb2.nc
+        pressfc.cdas1.201104.grb2.nc
+        pressfc.cdas1.201105.grb2.nc
+        pressfc.cdas1.201106.grb2.nc
+        pressfc.cdas1.201107.grb2.nc
+        pressfc.cdas1.201108.grb2.nc
+        pressfc.cdas1.201109.grb2.nc
+        pressfc.cdas1.201110.grb2.nc
+        pressfc.cdas1.201111.grb2.nc
+        pressfc.cdas1.201112.grb2.nc
+        pressfc.cdas1.201201.grb2.nc
+        pressfc.cdas1.201202.grb2.nc
+        pressfc.cdas1.201203.grb2.nc
+        pressfc.cdas1.201204.grb2.nc
+        pressfc.cdas1.201205.grb2.nc
+        pressfc.cdas1.201206.grb2.nc
+        pressfc.cdas1.201207.grb2.nc
+        pressfc.cdas1.201208.grb2.nc
+        pressfc.cdas1.201209.grb2.nc
+        pressfc.cdas1.201210.grb2.nc
+        pressfc.cdas1.201211.grb2.nc
+        pressfc.cdas1.201212.grb2.nc
+        pressfc.cdas1.201301.grb2.nc
+        pressfc.cdas1.201302.grb2.nc
+        pressfc.cdas1.201303.grb2.nc
+        pressfc.cdas1.201304.grb2.nc
+        pressfc.cdas1.201305.grb2.nc
+        pressfc.cdas1.201306.grb2.nc
+        pressfc.cdas1.201307.grb2.nc
+        pressfc.cdas1.201308.grb2.nc
+        pressfc.cdas1.201309.grb2.nc
+        pressfc.cdas1.201310.grb2.nc
+        pressfc.cdas1.201311.grb2.nc
+        pressfc.cdas1.201312.grb2.nc
+      </value>
+      <value stream="CFSv2.NCEP.WND10M">
+        wnd10m.gdas.201101.grb2.nc
+        wnd10m.gdas.201102.grb2.nc
+        wnd10m.gdas.201103.grb2.nc
+        wnd10m.cdas1.201104.grb2.nc
+        wnd10m.cdas1.201105.grb2.nc
+        wnd10m.cdas1.201106.grb2.nc
+        wnd10m.cdas1.201107.grb2.nc
+        wnd10m.cdas1.201108.grb2.nc
+        wnd10m.cdas1.201109.grb2.nc
+        wnd10m.cdas1.201110.grb2.nc
+        wnd10m.cdas1.201111.grb2.nc
+        wnd10m.cdas1.201112.grb2.nc
+        wnd10m.cdas1.201201.grb2.nc
+        wnd10m.cdas1.201202.grb2.nc
+        wnd10m.cdas1.201203.grb2.nc
+        wnd10m.cdas1.201204.grb2.nc
+        wnd10m.cdas1.201205.grb2.nc
+        wnd10m.cdas1.201206.grb2.nc
+        wnd10m.cdas1.201207.grb2.nc
+        wnd10m.cdas1.201208.grb2.nc
+        wnd10m.cdas1.201209.grb2.nc
+        wnd10m.cdas1.201210.grb2.nc
+        wnd10m.cdas1.201211.grb2.nc
+        wnd10m.cdas1.201212.grb2.nc
+        wnd10m.cdas1.201301.grb2.nc
+        wnd10m.cdas1.201302.grb2.nc
+        wnd10m.cdas1.201303.grb2.nc
+        wnd10m.cdas1.201304.grb2.nc
+        wnd10m.cdas1.201305.grb2.nc
+        wnd10m.cdas1.201306.grb2.nc
+        wnd10m.cdas1.201307.grb2.nc
+        wnd10m.cdas1.201308.grb2.nc
+        wnd10m.cdas1.201309.grb2.nc
+        wnd10m.cdas1.201310.grb2.nc
+        wnd10m.cdas1.201311.grb2.nc
+        wnd10m.cdas1.201312.grb2.nc
+      </value>
+      <value stream="CFSR.NCEP.PRATE">null</value>
+      <value stream="CFSR.NCEP.PRESSFC">null</value>
+      <value stream="CFSR.NCEP.WND10M">null</value>
     </values>
   </entry>
 
@@ -2122,15 +2247,25 @@
       <value stream="topo.observed">
         TOPO topo
       </value>
-      <value  stream="CFSv2.UV">
-        U_GRD_L103  u
-        V_GRD_L103  v
-        TBOT tbot
+      <value  stream="CFSv2.NCEP.PRATE">
+        PRATE_L1_Avg_1  prec
       </value>
-      <value  stream="CFSR.UV">
+      <value  stream="CFSv2.NCEP.PRESSFC">
+        PRES_L1  pbot
+      </value>
+      <value  stream="CFSv2.NCEP.WND10M">
         U_GRD_L103  u
         V_GRD_L103  v
-        TBOT tbot
+      </value>
+      <value  stream="CFSR.NCEP.PRATE">
+        PRATE_L1_Avg_1  prec
+      </value>
+      <value  stream="CFSR.NCEP.PRESSFC">
+        PRES_L1  pbot
+      </value>
+      <value  stream="CFSR.NCEP.WND10M">
+        U_GRD_L103  u
+        V_GRD_L103  v
       </value>
     </values>
   </entry>
@@ -2183,8 +2318,8 @@
       <value stream="presaero.SSP">2015</value>
       <value stream="topo.observed">1</value>
       <value stream="topo.cplhist">$DATM_CPLHIST_YR_ALIGN</value>
-      <value stream="CFSv2.UV">1</value>
-      <value stream="CFSR.UV">1</value>
+      <value stream="CFSv2.*">$DATM_CLMNCEP_YR_ALIGN</value>
+      <value stream="CFSR.*">$DATM_CLMNCEP_YR_ALIGN</value>
       <value stream="topo.e3smwcv2">$DATM_E3SMWCv2_YR_ALIGN</value>
       <value stream="topo.cplwch">$DATM_CPLWCH_YR_ALIGN</value>
     </values>
@@ -2265,8 +2400,8 @@
       <value stream="presaero.cesm2_omip" datm_mode="CORE_IAF_JRA.*2018">1652</value> <!-- 1958-(6-1)*(2018-1958+1)-1 -->
       <value stream="topo.observed">1</value>
       <value stream="topo.cplhist">$DATM_CPLHIST_YR_START</value>
-      <value stream="CFSv2.UV">1</value>
-      <value stream="CFSR.UV">1</value>
+      <value stream="CFSv2.*">$DATM_CLMNCEP_YR_START</value>
+      <value stream="CFSR.*">$DATM_CLMNCEP_YR_START</value>
       <value stream="topo.e3smwcv2">$DATM_E3SMWCv2_YR_START</value>
       <value stream="topo.cplwch">$DATM_CPLWCH_YR_START</value>
     </values									>
@@ -2350,8 +2485,8 @@
       <value stream="presaero.cesm2_omip" datm_mode="CORE_IAF_JRA.*2018">2019</value> <!-- 2018+1 -->
       <value stream="topo.observed">1</value>
       <value stream="topo.cplhist">$DATM_CPLHIST_YR_END</value>
-      <value stream="CFSv2.UV">1</value>
-      <value stream="CFSR.UV">1</value>
+      <value stream="CFSv2.*">$DATM_CLMNCEP_YR_END</value>
+      <value stream="CFSR.*">$DATM_CLMNCEP_YR_END</value>
       <value stream="topo.e3smwcv2">$DATM_E3SMWCv2_YR_START</value>
       <value stream="topo.cplwch">$DATM_CPLWCH_YR_START</value>
     </values>
@@ -2395,6 +2530,8 @@
       <value stream="CPLWCHForcing.State1hr">900</value>
       <value stream="presaero.cplwch">0</value>
       <value stream="topo.cplwch">0</value>
+      <value stream="CFSv2.*">0</value>
+      <value stream="CFSR.*">0</value>
     </values>
   </entry>
 
@@ -2721,6 +2858,8 @@
       <value stream="CORE_IAF_JRA.*.GISS.SWDN">coszen</value>
       <value stream="IAF_JRA_1p5.*.GISS.SWDN">coszen</value>
       <value stream="CORE_RYF.*.GISS.SWDN">coszen</value>
+      <value stream="CFSv2.*">nearest</value>
+      <value stream="CFSR.*">nearest</value>
     </values>
   </entry>
 
