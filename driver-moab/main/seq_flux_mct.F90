@@ -2,7 +2,8 @@ module seq_flux_mct
 
   use shr_kind_mod,      only: r8 => shr_kind_r8, in=>shr_kind_in
   use shr_sys_mod,       only: shr_sys_abort
-  use shr_flux_mod,      only: shr_flux_atmocn, shr_flux_atmocn_ua, shr_flux_atmocn_diurnal, shr_flux_adjust_constants
+  use shr_flux_mod,      only: shr_flux_atmocn, shr_flux_atmocn_ua, shr_flux_atmocn_diurnal, &
+                               shr_flux_atmocn_cfs, shr_flux_adjust_constants
   use shr_orb_mod,       only: shr_orb_params, shr_orb_cosz, shr_orb_decl
   use shr_mct_mod,       only: shr_mct_queryConfigFile, shr_mct_sMatReaddnc
 
@@ -1338,8 +1339,8 @@ contains
     end if
 
     if (flux_diurnal) then
-       if (ocn_surface_flux_scheme.eq.2) then
-          call shr_sys_abort(trim(subname)//' ERROR cannot use flux_diurnal with UA flux scheme')
+       if (ocn_surface_flux_scheme.eq.2 .or. ocn_surface_flux_scheme.eq.3) then
+          call shr_sys_abort(trim(subname)//' ERROR cannot use flux_diurnal with UA or CFS flux scheme')
        endif
        call shr_flux_atmocn_diurnal (nloc_a2o , zbot , ubot, vbot, thbot, &
             shum , shum_16O , shum_HDO, shum_18O, dens , tbot, uocn, vocn , &
@@ -1367,6 +1368,8 @@ contains
             duu10n,ustar, re  , ssq , missval = 0.0_r8, &
             wsresp=wsresp, tau_est=tau_est)
        u10res = sqrt(duu10n) ! atm-supplied gustiness not implemented for UA
+    else if (ocn_surface_flux_scheme.eq.3) then
+       call shr_flux_atmOcn_CFS(nloc_a2o, ubot, vbot, uocn, vocn, emask, taux, tauy, duu10n, u10res)
     else
 
        call shr_flux_atmocn (nloc_a2o , zbot , ubot, vbot, thbot, &
@@ -1851,8 +1854,8 @@ contains
     end if  ! end of if else for dead or live components
 
     if (flux_diurnal) then
-       if (ocn_surface_flux_scheme.eq.2) then
-          call shr_sys_abort(trim(subname)//' ERROR cannot use flux_diurnal with UA flux scheme')
+       if (ocn_surface_flux_scheme.eq.2 .or. ocn_surface_flux_scheme.eq.3) then
+          call shr_sys_abort(trim(subname)//' ERROR cannot use flux_diurnal with UA or CFS flux scheme')
        endif
 
        call shr_flux_atmocn_diurnal (nloc , zbot , ubot, vbot, thbot, &
@@ -1883,6 +1886,8 @@ contains
             evap , evap_16O, evap_HDO, evap_18O, taux , tauy, tref, qref , &
             duu10n,ustar, re  , ssq, wsresp=wsresp, tau_est=tau_est)
        u10res = sqrt(duu10n) ! atm-supplied gustiness not implemented for UA
+    else if (ocn_surface_flux_scheme.eq.3) then
+       call shr_flux_atmOcn_CFS(nloc, ubot, vbot, uocn, vocn, emask, taux, tauy, duu10n, u10res)
     else
        call shr_flux_atmocn (nloc , zbot , ubot, vbot, thbot, &
             shum , shum_16O , shum_HDO, shum_18O, dens , tbot, uocn, vocn , &
