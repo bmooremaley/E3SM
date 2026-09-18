@@ -34,7 +34,7 @@ module shr_flux_mod
    public :: shr_flux_atmOcn_diurnal   ! computes atm/ocn fluxes with diurnal cycle
    public :: shr_flux_atmOcn_UA   ! computes atm/ocn fluxes using University of
                                   ! Arizona algorithm (Zeng et al., 1998)
-   public :: shr_flux_atmOcn_CFS  ! computes atm/ocn wind stress for CFS forcing
+   public :: shr_flux_atmOcn_barotropic  ! computes atm/ocn wind stress for barotropic configurations
    public :: shr_flux_atmIce      ! computes atm/ice fluxes
    public :: shr_flux_MOstability ! boundary layer stability scales/functions
    public :: shr_flux_adjust_constants ! adjust constant values used in flux calculations.
@@ -2106,19 +2106,20 @@ END subroutine shr_flux_atmOcn_diurnal
 !===============================================================================
 !BOP ===========================================================================
 !
-! !IROUTINE: shr_flux_atmOcn_CFS -- computes atm/ocn wind stress for CFS forcing
+! !IROUTINE: shr_flux_atmOcn_barotropic -- computes atm/ocn wind stress for
+!                                          barotropic configurations
 !
 ! !DESCRIPTION:
-!    Computes wind stress for CFS forcing of barotropic storm surge configura-
-!    tions using the Garratt (1977) drag coefficient applied to 10m winds
-!    relative to the ocean surface. Incompatible with the diurnal cycle option.
+!    Computes wind stress for forcing of barotropic storm surge configurations
+!    using the Garratt (1977) drag coefficient applied to 10m winds relative to
+!    the ocean surface. Incompatible with the diurnal cycle option.
 !
 ! !REVISION HISTORY:
 !    2026-Sep - B. Moore-Maley - first version
 !
 ! !INTERFACE: ------------------------------------------------------------------
 
-subroutine shr_flux_atmOcn_CFS(nMax, ubot, vbot, us, vs, mask, taux, tauy, duu10n, u10n)
+subroutine shr_flux_atmOcn_barotropic(nMax, ubot, vbot, us, vs, mask, taux, tauy, duu10n, u10n)
 
    integer(IN), intent(in)  :: nMax       ! number of grid cells
    real(R8),    intent(in)  :: ubot  (:)  ! atm velocity, zonal      (m/s)
@@ -2149,7 +2150,7 @@ subroutine shr_flux_atmOcn_CFS(nMax, ubot, vbot, us, vs, mask, taux, tauy, duu10
       end if
    end do
 
-end subroutine shr_flux_atmOcn_CFS
+end subroutine shr_flux_atmOcn_barotropic
 
 !===============================================================================
 !BOP ===========================================================================

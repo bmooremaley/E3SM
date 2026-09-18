@@ -898,7 +898,7 @@
       0: standard surface flux calculation as in E3SMv1
       1: COAREv3.0 flux computation (Fairall et al., 2003)
       2: University of Arizona algorithm (Zeng et al., 1998)
-      3: Simple wind stress (Garratt, 1977) for CFS forcing of barotropic storm surge
+      3: Simple wind stress (Garratt, 1977) for forcing barotropic storm surge
       default: 0
      </desc>
      <values>
