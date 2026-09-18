@@ -2202,10 +2202,13 @@ contains
 
    real (kind=RKIND), dimension(:,:), pointer :: landIceInterfaceTracers
 
-   real (kind=RKIND) :: riverFactor
+   real (kind=RKIND) :: riverFactor, ramp
 
-   ! freshwater balance adjustment 
-   logical, pointer :: config_use_precip_scaling
+   ! freshwater balance adjustment and forcing ramp
+   logical, pointer :: config_use_precip_scaling, &
+                       config_use_atmospheric_forcing_ramp
+   real (kind=RKIND), pointer :: config_atmospheric_forcing_ramp, &
+                                 config_atmospheric_forcing_ramp_delay
 
 !-----------------------------------------------------------------------
 !
@@ -2242,9 +2245,21 @@ contains
    precFactor = 1.0_RKIND  ! Default to no scaling
    !configuration for freshwater balance constrains
    call mpas_pool_get_config(domain % configs, 'config_use_precip_scaling', config_use_precip_scaling)
+   call mpas_pool_get_config(domain % configs, 'config_use_atmospheric_forcing_ramp', config_use_atmospheric_forcing_ramp)
+   call mpas_pool_get_config(domain % configs, 'config_atmospheric_forcing_ramp', config_atmospheric_forcing_ramp)
+   call mpas_pool_get_config(domain % configs, 'config_atmospheric_forcing_ramp_delay', config_atmospheric_forcing_ramp_delay)
    if (config_use_precip_scaling) then
-      !extract scaling factors 
+      !extract scaling factors
       call seq_infodata_GetData(infodata, precip_fact=precFactor)
+   end if
+
+   if (config_use_atmospheric_forcing_ramp) then
+      if (daysSinceStartOfSim >= config_atmospheric_forcing_ramp_delay) then
+         ramp = tanh((2.0_RKIND*(daysSinceStartOfSim - config_atmospheric_forcing_ramp_delay)) &
+                    / config_atmospheric_forcing_ramp)
+      else
+         ramp = 0.0_RKIND
+      end if
    end if
 
    n = 0
@@ -2772,6 +2787,22 @@ contains
            if ( windSpeedSquared10mField % isActive ) then
               windSpeedSquared10mCFC(i) = x2o_o(index_x2o_So_duu10n, n)
            end if
+        end if
+
+        ! Apply forcing ramp
+        if (config_use_atmospheric_forcing_ramp) then
+           if ( windStressZonalField % isActive ) then
+              windStressZonal(i) = ramp*windStressZonal(i)
+           endif
+           if ( windStressMeridionalField % isActive ) then
+              windStressMeridional(i) = ramp*windStressMeridional(i)
+           endif
+           if ( atmosphericPressureField % isActive ) then
+              atmosphericPressure(i) = (1.0_RKIND-ramp)*atm_ref_pressure + ramp*atmosphericPressure(i)
+           endif
+           if ( rainFluxField % isActive ) then
+              rainFlux(i) = ramp*rainFlux(i)
+           endif
         end if
 
       end do

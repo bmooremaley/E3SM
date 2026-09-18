@@ -810,6 +810,18 @@
 					description="Prescribed subglacial runoff salinity value, applied when config_use_sgr_opt_salt_prescribed = .true."
 					possible_values="Any positive real number"
 		/>
+		<nml_option name="config_use_atmospheric_forcing_ramp" type="logical" default_value=".false."
+					description="If true, smoothly ramp atmospheric forcing fields from reference values toward coupler values."
+					possible_values=".true. or .false."
+		/>
+		<nml_option name="config_atmospheric_forcing_ramp" type="real" default_value="10.0" units="days"
+					description="Number of days to ramp up forcing"
+					possible_values="Any positive real number"
+		/>
+		<nml_option name="config_atmospheric_forcing_ramp_delay" type="real" default_value="0.0" units="days"
+					description="Number of days to delay ramp forcing"
+					possible_values="Any positive real number"
+		/>
 	</nml_record>
 	<nml_record name="precip_scaling" mode="init;forward">
 		<nml_option name="config_use_precip_scaling" type="logical" default_value=".false."

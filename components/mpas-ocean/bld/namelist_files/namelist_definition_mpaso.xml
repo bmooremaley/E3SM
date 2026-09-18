@@ -1386,6 +1386,30 @@ Valid values: Any positive real number
 Default: Defined in namelist_defaults.xml
 </entry>
 
+<entry id="config_use_atmospheric_forcing_ramp" type="logical"
+	category="forcing" group="forcing">
+If true, smoothly ramp atmospheric forcing fields from reference values toward coupler values.
+
+Valid values: .true. or .false.
+Default: Defined in namelist_defaults.xml
+</entry>
+
+<entry id="config_atmospheric_forcing_ramp" type="real"
+	category="forcing" group="forcing">
+Number of days to ramp up forcing.
+
+Valid values: Any positive real number
+Default: Defined in namelist_defaults.xml
+</entry>
+
+<entry id="config_atmospheric_forcing_ramp_delay" type="real"
+	category="forcing" group="forcing">
+Number of days to delay ramp forcing.
+
+Valid values: Any positive real number
+Default: Defined in namelist_defaults.xml
+</entry>
+
 
 <!-- precip_scaling -->
 

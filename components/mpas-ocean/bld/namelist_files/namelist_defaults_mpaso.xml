@@ -414,6 +414,9 @@
 <config_use_sgr_opt_salt_prescribed>.false.</config_use_sgr_opt_salt_prescribed>
 <config_sgr_temperature_prescribed>0.0</config_sgr_temperature_prescribed>
 <config_sgr_salinity_prescribed>0.0</config_sgr_salinity_prescribed>
+<config_use_atmospheric_forcing_ramp>.false.</config_use_atmospheric_forcing_ramp>
+<config_atmospheric_forcing_ramp>10.0</config_atmospheric_forcing_ramp>
+<config_atmospheric_forcing_ramp_delay>0.0</config_atmospheric_forcing_ramp_delay>
 
 <!-- precip_scaling -->
 <config_use_precip_scaling>.false.</config_use_precip_scaling>
