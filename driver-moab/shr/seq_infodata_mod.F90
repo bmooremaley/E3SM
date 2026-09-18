@@ -114,7 +114,7 @@ MODULE seq_infodata_mod
      character(SHR_KIND_CL)  :: flux_epbal      ! selects E,P,R adjustment technique
      logical                 :: flux_albav      ! T => no diurnal cycle in ocn albedos
      logical                 :: flux_diurnal    ! T => diurnal cycle in atm/ocn fluxes
-     integer                 :: ocn_surface_flux_scheme  ! 0: E3SMv1 1: COARE 2: UA 3: CFS
+     integer                 :: ocn_surface_flux_scheme  ! 0: E3SMv1 1: COARE 2: UA 3: barotropic
      character(SHR_KIND_CS)  :: precip_downscaling_method !Precipitation downscaling method used
                                                           !in the land model(current possible options: ERMM (default), FNM)
      logical                 :: coldair_outbreak_mod ! (Mahrt & Sun 1995,MWR)
@@ -384,7 +384,7 @@ CONTAINS
     character(SHR_KIND_CL) :: flux_epbal         ! selects E,P,R adjustment technique
     logical                :: flux_albav         ! T => no diurnal cycle in ocn albedos
     logical                :: flux_diurnal       ! T => diurnal cycle in atm/ocn fluxes
-    integer                :: ocn_surface_flux_scheme  ! 0: E3SMv1 1: COARE 2: UA 3: CFS
+    integer                :: ocn_surface_flux_scheme  ! 0: E3SMv1 1: COARE 2: UA 3: barotropic
     character(SHR_KIND_CS) :: precip_downscaling_method ! Precipitation downscaling method
     logical                 :: coldair_outbreak_mod ! (Mahrt & Sun 1995,MWR)
     real(SHR_KIND_R8)       :: flux_convergence   ! atmocn flux calc convergence value
@@ -1133,7 +1133,7 @@ CONTAINS
     character(len=*),       optional, intent(OUT) :: flux_epbal              ! selects E,P,R adjustment technique
     logical,                optional, intent(OUT) :: flux_albav              ! T => no diurnal cycle in ocn albedos
     logical,                optional, intent(OUT) :: flux_diurnal            ! T => diurnal cycle in atm/ocn flux
-    integer,                optional, intent(OUT) :: ocn_surface_flux_scheme ! 0: E3SMv1  1: COARE  2: UA  3: CFS
+    integer,                optional, intent(OUT) :: ocn_surface_flux_scheme ! 0: E3SMv1  1: COARE  2: UA  3: barotropic
     real(SHR_KIND_R8), optional, intent(out)      :: flux_convergence   ! atmocn flux calc convergence value
     logical, optional, intent(out) :: coldair_outbreak_mod        ! (Mahrt & Sun 1995, MWR)
     integer, optional, intent(OUT)                :: flux_max_iteration ! max number of iterations of atmocn flux loop
@@ -1715,7 +1715,7 @@ CONTAINS
     character(len=*),       optional, intent(IN)    :: flux_epbal              ! selects E,P,R adjustment technique
     logical,                optional, intent(IN)    :: flux_albav              ! T => no diurnal cycle in ocn albedos
     logical,                optional, intent(IN)    :: flux_diurnal            ! T => diurnal cycle in atm/ocn flux
-    integer,                optional, intent(IN)    :: ocn_surface_flux_scheme ! 0: E3SMv1 1: COARE 2: UA 3: CFS
+    integer,                optional, intent(IN)    :: ocn_surface_flux_scheme ! 0: E3SMv1 1: COARE 2: UA 3: barotropic
     character(len=*),       optional, intent(IN)    :: precip_downscaling_method!precip downscaling method from the land model
                                                                                 !ERMM (default) or  FNM
     logical, optional, intent(in) :: coldair_outbreak_mod
