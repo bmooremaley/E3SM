@@ -45,6 +45,7 @@ my @groups = qw(run_modes
                 init_mode_vert_levels
                 manufactured_solution
                 init_mode_subgrid
+                wetting_drying
                 tracer_forcing_activetracers
                 tracer_forcing_debugtracers
                 tracer_forcing_ecosystracers
