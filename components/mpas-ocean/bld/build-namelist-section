@@ -259,6 +259,9 @@ add_default($nl, 'config_use_sgr_opt_temp_prescribed');
 add_default($nl, 'config_use_sgr_opt_salt_prescribed');
 add_default($nl, 'config_sgr_temperature_prescribed');
 add_default($nl, 'config_sgr_salinity_prescribed');
+add_default($nl, 'config_use_atmospheric_forcing_ramp');
+add_default($nl, 'config_atmospheric_forcing_ramp');
+add_default($nl, 'config_atmospheric_forcing_ramp_delay');
 
 ##################################
 # Namelist group: precip_scaling #
@@ -596,6 +599,22 @@ add_default($nl, 'config_manufactured_solution_amplitude');
 #####################################
 
 add_default($nl, 'config_subgrid_table_levels');
+
+##############################
+# Namelist group: wetting_drying #
+##############################
+
+add_default($nl, 'config_use_wetting_drying');
+add_default($nl, 'config_prevent_drying');
+add_default($nl, 'config_drying_min_cell_height');
+add_default($nl, 'config_zero_drying_velocity');
+add_default($nl, 'config_zero_drying_velocity_ramp');
+add_default($nl, 'config_zero_drying_velocity_ramp_hmin');
+add_default($nl, 'config_zero_drying_velocity_ramp_hmax');
+add_default($nl, 'config_verify_not_dry');
+add_default($nl, 'config_drying_safety_height');
+add_default($nl, 'config_use_subgrid_wetting_drying');
+add_default($nl, 'config_use_ssh_gradient_wetting_drying');
 
 ################################################
 # Namelist group: tracer_forcing_activeTracers #
