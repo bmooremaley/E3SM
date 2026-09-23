@@ -135,6 +135,8 @@ data (see cime issue #3653 -- https://github.com/ESMCI/cime/issues/3653).
       <value compset="_DLND%GPCC">observed</value>
       <value compset="_DATM%CPLHIST">cplhist</value>
       <value compset="_DATM%MOSARTTEST">observed</value>
+      <value compset="_DATM%CFSv2">none</value>
+      <value compset="_DATM%CFSR">none</value>
     </values>
     <group>run_component_datm</group>
     <file>env_run.xml</file>
@@ -404,6 +406,8 @@ data (see cime issue #3653 -- https://github.com/ESMCI/cime/issues/3653).
       <value compset="2000_DATM%JRA">1</value>
       <value compset="2000_DATM%JRA-1p5">1</value>
       <value compset="2000_DATM%JRA-1p5_2023">1</value>
+      <value compset="2000_DATM%CFSv2">$DATM_CLMNCEP_YR_START</value>
+      <value compset="2000_DATM%CFSR">$DATM_CLMNCEP_YR_START</value>
       <value compset="2003.*_DATM">$DATM_CLMNCEP_YR_START</value>
       <value compset="2010.*_DATM">$DATM_CLMNCEP_YR_START</value>
       <value compset="4804.*_DATM">$DATM_CLMNCEP_YR_START</value>
@@ -456,6 +460,8 @@ data (see cime issue #3653 -- https://github.com/ESMCI/cime/issues/3653).
       <value compset="2010.*_DATM%NLDAS2">2005</value>
       <value compset="2003.*_DATM%NLDAS2">2002</value>
       <value compset="2000_DATM%JRA">1958</value>
+      <value compset="2000_DATM%CFSv2">2011</value>
+      <value compset="2000_DATM%CFSR">2000</value>
       <value compset="2000.*_DATM%ERA5">1979</value>
       <value compset="2000.*_DATM%ERA56HR">1979</value>
     </values>
@@ -510,6 +516,8 @@ data (see cime issue #3653 -- https://github.com/ESMCI/cime/issues/3653).
       <value   compset="2000_DATM%JRA">2016</value>
       <value   compset="2000_DATM%JRA-1p5">2020</value>
       <value   compset="2000_DATM%JRA-1p5-2023">2023</value>
+      <value   compset="2000_DATM%CFSv2">2013</value>
+      <value   compset="2000_DATM%CFSR">2011</value>
       <value   compset="2000.*_DATM%ERA5">1979</value>
       <value   compset="2000.*_DATM%ERA56HR">1979</value>
     </values>
