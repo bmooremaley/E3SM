@@ -107,6 +107,12 @@ def _create_drv_namelists(case, infile, confdir, nmlgen, files):
             nmlgen.set_value('brnch_retain_casename' , value='.true.')
 
     #--------------------------------
+    # Overwrite: set ocn_surface_flux_scheme for MAB45to5rr1 ocean mesh
+    #--------------------------------
+    if case.get_value('OCN_GRID') == 'MAB45to5rr1':
+        nmlgen.set_value('ocn_surface_flux_scheme', value=3)
+
+    #--------------------------------
     # Overwrite: set component coupling frequencies
     #--------------------------------
     ncpl_base_period  = case.get_value('NCPL_BASE_PERIOD')

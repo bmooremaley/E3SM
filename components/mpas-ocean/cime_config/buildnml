@@ -439,6 +439,13 @@ def buildnml(case, caseroot, compname):
         if ocn_glc_ismf_coupling == 'data_mpaso':
             data_ismf_file = 'prescribed_ismf_paolo2023.SOwISC12to30E3r4.20250121.nc'
 
+    elif ocn_grid == 'MAB45to5rr1':
+        decomp_date = '20260922'
+        decomp_prefix = 'partitions/mpas-o.graph.info.'
+        ic_date = '20260922'
+        ic_prefix = 'mpaso.MAB45to5rr1'
+        # No restoring_file: barotropic mesh, tracers are not evolved
+
     #--------------------------------------------------------------------
     # Set OCN_FORCING = datm_forced_restoring if restoring file is available
     #--------------------------------------------------------------------
