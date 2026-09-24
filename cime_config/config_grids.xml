@@ -5815,6 +5815,7 @@
     <gridmap atm_grid="T574" ocn_grid="MAB45to5rr1">
       <map name="ATM2OCN_FMAPNAME">cpl/gridmaps/T574/map_T574_to_MAB45to5rr1_traave.20260910.nc</map>
       <map name="ATM2OCN_SMAPNAME">cpl/gridmaps/T574/map_T574_to_MAB45to5rr1_trbilin.20260910.nc</map>
+      <map name="ATM2OCN_VMAPNAME">cpl/gridmaps/T574/map_T574_to_MAB45to5rr1_trbilin.20260910.nc</map>
       <map name="OCN2ATM_FMAPNAME">cpl/gridmaps/MAB45to5rr1/map_MAB45to5rr1_to_T574_traave.20260910.nc</map>
       <map name="OCN2ATM_SMAPNAME">cpl/gridmaps/MAB45to5rr1/map_MAB45to5rr1_to_T574_traave.20260910.nc</map>
     </gridmap>
