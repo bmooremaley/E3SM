@@ -132,8 +132,9 @@ module prep_ocn_mod
   integer        , target  :: x2oacc_om_cnt ! x2oacc_ox: number of time samples accumulated, in moab array
   integer                  :: arrSize_x2o_om !   this will be a module variable, size moabLocal_size * nof
 
-  ! flag that saves rof_c2_ocn value from init routine, to be used for merge routine
+  ! flags that save coupling state from init routine, to be used for merge routine
   logical                  :: rof_c2_ocn_saved
+  logical                  :: ice_c2_ocn_saved
 
   ! other module variables
   integer       :: mpicom_CPLID   ! MPI cpl communicator
@@ -751,6 +752,7 @@ contains
        call shr_sys_flush(logunit)
 
        rof_c2_ocn_saved = rof_c2_ocn  ! save the value, and use it for merge, later
+       ice_c2_ocn_saved = ice_c2_ocn
        if (rof_c2_ocn) then
           if (iamroot_CPLID) then
              write(logunit,*) ' '
@@ -1778,11 +1780,15 @@ subroutine prep_ocn_mrg_moab(infodata, xao_ox, timer_mrg)
       call shr_sys_abort(subname//' error in getting a2x_om array ')
     endif
 
-    tagname = trim(seq_flds_i2x_fields)//C_NULL_CHAR
-    arrsize = niflds * lsize !        allocate (i2x_om (lsize, niflds))
-    ierr = iMOAB_GetDoubleTagStorage ( mboxid, tagname, arrsize , ent_type, i2x_om)
-    if (ierr .ne. 0) then
-      call shr_sys_abort(subname//' error in getting i2x_om array ')
+    if (ice_c2_ocn_saved) then
+      tagname = trim(seq_flds_i2x_fields)//C_NULL_CHAR
+      arrsize = niflds * lsize !        allocate (i2x_om (lsize, niflds))
+      ierr = iMOAB_GetDoubleTagStorage ( mboxid, tagname, arrsize , ent_type, i2x_om)
+      if (ierr .ne. 0) then
+        call shr_sys_abort(subname//' error in getting i2x_om array ')
+      endif
+    else
+      i2x_om = 0.0_R8
     endif
 
     if (rof_c2_ocn_saved) then
