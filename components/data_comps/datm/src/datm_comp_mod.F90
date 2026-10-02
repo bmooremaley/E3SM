@@ -1219,7 +1219,7 @@ CONTAINS
 
     case('CFSv2','CFSR')
        if (firstcall) then
-          if (sprecn < 1) then
+          if (sprec < 1) then
              write(logunit,F00) 'ERROR: prec must be in streams for CFSv2/CFSR'
              call shr_sys_abort(trim(subname)//'ERROR: prec must be in streams for CFSv2/CFSR')
           endif
@@ -1228,7 +1228,7 @@ CONTAINS
        do n = 1,lsize
           a2x%rAttr(kz,n)    = 10.0_R8                ! 10m reference height
           a2x%rAttr(kpslv,n) = a2x%rAttr(kpbot,n)     ! pslv = pbot for consistency
-          a2x%rAttr(krl,n)   = avstrm%rAttr(sprecn,n) ! all precip as large-scale rain
+          a2x%rAttr(krl,n)   = avstrm%rAttr(sprec,n)  ! all precip as large-scale rain
           a2x%rAttr(krc,n)   = 0.0_R8                 ! no convective rain
           a2x%rAttr(ksc,n)   = 0.0_R8                 ! no convective snow
           a2x%rAttr(ksl,n)   = 0.0_R8                 ! no large-scale snow

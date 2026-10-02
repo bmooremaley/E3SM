@@ -2530,8 +2530,8 @@
       <value stream="CPLWCHForcing.State1hr">900</value>
       <value stream="presaero.cplwch">0</value>
       <value stream="topo.cplwch">0</value>
-      <value stream="CFSv2.*">0</value>
-      <value stream="CFSR.*">0</value>
+      <value stream="CFSv2.*">-3600</value>
+      <value stream="CFSR.*">-3600</value>
     </values>
   </entry>
 
@@ -2547,7 +2547,7 @@
     <type>char</type>
     <category>streams</category>
     <group>shr_strdata_nml</group>
-    <valid_values>CLMNCEP,COPYALL,CORE2_NYF,CORE2_IAF,CORE_IAF_JRA,IAF_JRA_1p5,CORE_RYF_JRA,NULL</valid_values>
+    <valid_values>CLMNCEP,COPYALL,CORE2_NYF,CORE2_IAF,CORE_IAF_JRA,IAF_JRA_1p5,CORE_RYF_JRA,CFSv2,CFSR,NULL</valid_values>
     <desc>
       general method that operates on the data.  this is generally
       implemented in the data models but is set in the strdata method for
@@ -2608,8 +2608,8 @@
       <value datm_mode="IAF_JRA_1p5">IAF_JRA_1p5</value>
       <value datm_mode="CORE_RYF*">CORE_RYF_JRA</value>
       <value datm_mode="CPLHIST">COPYALL</value>
-      <value datm_mode="CFSv2">COPYALL</value>
-      <value datm_mode="CFSR">COPYALL</value>
+      <value datm_mode="CFSv2">CFSv2</value>
+      <value datm_mode="CFSR">CFSR</value>
       <value datm_mode="E3SMWCv2">COPYALL</value>
       <value datm_mode="CPLWCH">COPYALL</value>
     </values>
@@ -2858,8 +2858,8 @@
       <value stream="CORE_IAF_JRA.*.GISS.SWDN">coszen</value>
       <value stream="IAF_JRA_1p5.*.GISS.SWDN">coszen</value>
       <value stream="CORE_RYF.*.GISS.SWDN">coszen</value>
-      <value stream="CFSv2.*">nearest</value>
-      <value stream="CFSR.*">nearest</value>
+      <value stream="CFSv2.*">linear</value>
+      <value stream="CFSR.*">linear</value>
     </values>
   </entry>
 
