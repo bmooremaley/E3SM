@@ -2160,6 +2160,24 @@
 			<var name="maxLevelCell"/>
 			<var name="refBottomDepth" packages="forwardMode;analysisMode"/>
 			<var name="restingThickness" packages="forwardMode;analysisMode"/>
+			<var name="subgridWetVolumeCellTable" packages="subgridWetDryPKG"/>
+			<var name="subgridWetVolumeEdgeTable" packages="subgridWetDryPKG"/>
+			<var name="subgridWetVolumeVertexTable" packages="subgridWetDryPKG"/>
+			<var name="subgridSshCellTableRange" packages="subgridWetDryPKG"/>
+			<var name="subgridSshEdgeTableRange" packages="subgridWetDryPKG"/>
+			<var name="subgridSshVertexTableRange" packages="subgridWetDryPKG"/>
+			<var name="subgridEdgeBathymetryMean" packages="subgridWetDryPKG"/>
+			<var name="subgridVertexBathymetryMean" packages="subgridWetDryPKG"/>
+			<var name="subgridCellBathymetryMin" packages="subgridWetDryPKG"/>
+			<var name="subgridEdgeBathymetryMin" packages="subgridWetDryPKG"/>
+			<var name="subgridVertexBathymetryMin" packages="subgridWetDryPKG"/>
+			<var name="subgridLayerThicknessDebug" packages="subgridWetDryPKG"/>
+			<var name="subgridWetFractionCellTable" packages="subgridWetDryPKG"/>
+			<var name="subgridWetFractionEdgeTable" packages="subgridWetDryPKG"/>
+			<var name="subgridWetFractionVertexTable" packages="subgridWetDryPKG"/>
+			<var name="subgridSshDragEdgeTableRange" packages="subgridWetDryPKG"/>
+			<var name="subgridDragEdgeTable" packages="subgridWetDryPKG"/>
+			<var name="subgridEdgeArea" packages="subgridWetDryPKG"/>
 		</stream>
 
 		<stream name="input"
