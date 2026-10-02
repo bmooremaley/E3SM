@@ -67,7 +67,6 @@
 
 <!-- lateral_walls -->
 <config_wall_slip_factor>1.0</config_wall_slip_factor>
-<config_wall_slip_factor ocn_grid="MAB45to5rr1">0.0</config_wall_slip_factor>
 
 <!-- hmix -->
 <config_hmix_scaleWithMesh ocn_grid="oQU480">.false.</config_hmix_scaleWithMesh>
@@ -213,6 +212,7 @@
 <config_use_Redi ocn_grid="oRRS15to5">.false.</config_use_Redi>
 <config_use_Redi ocn_grid="RRSwISC6to18E3r5">.false.</config_use_Redi>
 <config_use_Redi ocn_grid="u01-oi6to18">.false.</config_use_Redi>
+<config_use_Redi ocn_grid="MAB45to5rr1">.false.</config_use_Redi>
 <config_Redi_closure>'constant'</config_Redi_closure>
 <config_Redi_constant_kappa>400.0</config_Redi_constant_kappa>
 <config_Redi_constant_kappa ocn_forcing="datm_forced_restoring">400.0</config_Redi_constant_kappa>
@@ -244,6 +244,7 @@
 
 <!-- submesoscale_eddy_parameterization -->
 <config_submesoscale_enable>.true.</config_submesoscale_enable>
+<config_submesoscale_enable ocn_grid="MAB45to5rr1">.false.</config_submesoscale_enable>
 <config_submesoscale_tau>172800</config_submesoscale_tau>
 <config_submesoscale_Ce>0.08</config_submesoscale_Ce>
 <config_submesoscale_Lfmin>1000.0</config_submesoscale_Lfmin>
@@ -257,6 +258,7 @@
 <config_use_GM ocn_grid="oRRS15to5">.false.</config_use_GM>
 <config_use_GM ocn_grid="RRSwISC6to18E3r5">.false.</config_use_GM>
 <config_use_GM ocn_grid="u01-oi6to18">.false.</config_use_GM>
+<config_use_GM ocn_grid="MAB45to5rr1">.false.</config_use_GM>
 <config_GM_closure>'EdenGreatbatch'</config_GM_closure>
 <config_GM_closure ocn_grid="EC30to60E2r2">'constant'</config_GM_closure>
 <config_GM_closure ocn_grid="WC14to60E2r3">'constant'</config_GM_closure>
@@ -428,7 +430,9 @@
 <config_use_variable_drag ocn_grid="MAB45to5rr1">.true.</config_use_variable_drag>
 <config_use_bulk_wind_stress>.true.</config_use_bulk_wind_stress>
 <config_bulk_wind_stress_interp_isotropic>.true.</config_bulk_wind_stress_interp_isotropic>
+<config_bulk_wind_stress_interp_isotropic ocn_grid="MAB45to5rr1">.false.</config_bulk_wind_stress_interp_isotropic>
 <config_use_bulk_thickness_flux>.true.</config_use_bulk_thickness_flux>
+<config_use_bulk_thickness_flux ocn_grid="MAB45to5rr1">.false.</config_use_bulk_thickness_flux>
 <config_flux_attenuation_coefficient>0.001</config_flux_attenuation_coefficient>
 <config_flux_attenuation_coefficient_runoff>10.0</config_flux_attenuation_coefficient_runoff>
 <config_subglacial_runoff_mode>'off'</config_subglacial_runoff_mode>
@@ -440,6 +444,7 @@
 <config_sgr_temperature_prescribed>0.0</config_sgr_temperature_prescribed>
 <config_sgr_salinity_prescribed>0.0</config_sgr_salinity_prescribed>
 <config_use_atmospheric_forcing_ramp>.false.</config_use_atmospheric_forcing_ramp>
+<config_use_atmospheric_forcing_ramp ocn_grid="MAB45to5rr1">.true.</config_use_atmospheric_forcing_ramp>
 <config_atmospheric_forcing_ramp>10.0</config_atmospheric_forcing_ramp>
 <config_atmospheric_forcing_ramp_delay>0.0</config_atmospheric_forcing_ramp_delay>
 
@@ -464,6 +469,7 @@
 <config_jerlov_water_type>3</config_jerlov_water_type>
 <config_surface_buoyancy_depth>1</config_surface_buoyancy_depth>
 <config_enable_shortwave_energy_fixer>.true.</config_enable_shortwave_energy_fixer>
+<config_enable_shortwave_energy_fixer ocn_grid="MAB45to5rr1">.false.</config_enable_shortwave_energy_fixer>
 
 <!-- self_attraction_loading -->
 <config_use_self_attraction_loading>.false.</config_use_self_attraction_loading>
@@ -477,13 +483,15 @@
 <config_use_parallel_self_attraction_loading>.false.</config_use_parallel_self_attraction_loading>
 <config_use_parallel_self_attraction_loading ocn_grid="MAB45to5rr1">.true.</config_use_parallel_self_attraction_loading>
 <config_parallel_self_attraction_loading_order>10</config_parallel_self_attraction_loading_order>
+<config_parallel_self_attraction_loading_order ocn_grid="MAB45to5rr1">50</config_parallel_self_attraction_loading_order>
 <config_parallel_self_attraction_loading_n_cells_per_block>600</config_parallel_self_attraction_loading_n_cells_per_block>
-<config_parallel_self_attraction_loading_bfb>.true.</config_parallel_self_attraction_loading_bfb>
+<config_parallel_self_attraction_loading_bfb>.false.</config_parallel_self_attraction_loading_bfb>
 
 <!-- tidal_potential_forcing -->
 <config_use_tidal_potential_forcing>.false.</config_use_tidal_potential_forcing>
 <config_use_tidal_potential_forcing ocn_grid="MAB45to5rr1">.true.</config_use_tidal_potential_forcing>
 <config_tidal_potential_reference_time>'0001-01-01_00:00:00'</config_tidal_potential_reference_time>
+<config_tidal_potential_reference_time ocn_grid="MAB45to5rr1">'2011-01-01_01:00:00'</config_tidal_potential_reference_time>
 <config_use_tidal_potential_forcing_M2>.true.</config_use_tidal_potential_forcing_M2>
 <config_use_tidal_potential_forcing_S2>.true.</config_use_tidal_potential_forcing_S2>
 <config_use_tidal_potential_forcing_N2>.true.</config_use_tidal_potential_forcing_N2>
@@ -647,6 +655,7 @@
 <config_use_topographic_wave_drag ocn_grid="MAB45to5rr1">.true.</config_use_topographic_wave_drag>
 <config_topographic_wave_drag_scheme>'ZAE'</config_topographic_wave_drag_scheme>
 <config_topographic_wave_drag_coeff>5.0e-4</config_topographic_wave_drag_coeff>
+<config_topographic_wave_drag_coeff ocn_grid="MAB45to5rr1">0.3</config_topographic_wave_drag_coeff>
 <config_thickness_drag_type>'centered'</config_thickness_drag_type>
 <config_topographic_wave_drag_cutoff_depth>500</config_topographic_wave_drag_cutoff_depth>
 <config_topographic_wave_drag_cutoff_width>10</config_topographic_wave_drag_cutoff_width>
@@ -695,6 +704,7 @@
 
 <!-- eos -->
 <config_eos_type>'jm'</config_eos_type>
+<config_eos_type ocn_grid="MAB45to5rr1">'linear'</config_eos_type>
 <config_open_ocean_freezing_temperature_coeff_0>0.0</config_open_ocean_freezing_temperature_coeff_0>
 <config_open_ocean_freezing_temperature_coeff_S>0.0</config_open_ocean_freezing_temperature_coeff_S>
 <config_open_ocean_freezing_temperature_coeff_p>0.0</config_open_ocean_freezing_temperature_coeff_p>
@@ -810,6 +820,7 @@
 <config_prescribe_velocity>.false.</config_prescribe_velocity>
 <config_prescribe_thickness>.false.</config_prescribe_thickness>
 <config_include_KE_vertex>.true.</config_include_KE_vertex>
+<config_include_KE_vertex ocn_grid="MAB45to5rr1">.false.</config_include_KE_vertex>
 <config_check_tracer_monotonicity>.false.</config_check_tracer_monotonicity>
 <config_compute_active_tracer_budgets>.true.</config_compute_active_tracer_budgets>
 <config_disable_thick_all_tend>.false.</config_disable_thick_all_tend>
@@ -817,6 +828,7 @@
 <config_disable_thick_vadv>.false.</config_disable_thick_vadv>
 <config_disable_thick_vadv ocn_grid="MAB45to5rr1">.true.</config_disable_thick_vadv>
 <config_disable_thick_sflux>.false.</config_disable_thick_sflux>
+<config_disable_thick_sflux ocn_grid="MAB45to5rr1">.true.</config_disable_thick_sflux>
 <config_disable_vel_all_tend>.false.</config_disable_vel_all_tend>
 <config_disable_vel_hadv>.false.</config_disable_vel_hadv>
 <config_disable_vel_coriolis>.false.</config_disable_vel_coriolis>
@@ -982,6 +994,7 @@
 
 <!-- AM_surfaceAreaWeightedAverages -->
 <config_AM_surfaceAreaWeightedAverages_enable>.true.</config_AM_surfaceAreaWeightedAverages_enable>
+<config_AM_surfaceAreaWeightedAverages_enable ocn_grid="MAB45to5rr1">.false.</config_AM_surfaceAreaWeightedAverages_enable>
 <config_AM_surfaceAreaWeightedAverages_compute_on_startup>.true.</config_AM_surfaceAreaWeightedAverages_compute_on_startup>
 <config_AM_surfaceAreaWeightedAverages_write_on_startup>.false.</config_AM_surfaceAreaWeightedAverages_write_on_startup>
 <config_AM_surfaceAreaWeightedAverages_compute_interval>'0000-00-00_01:00:00'</config_AM_surfaceAreaWeightedAverages_compute_interval>
@@ -1108,6 +1121,7 @@
 
 <!-- AM_mixedLayerDepths -->
 <config_AM_mixedLayerDepths_enable>.true.</config_AM_mixedLayerDepths_enable>
+<config_AM_mixedLayerDepths_enable ocn_grid="MAB45to5rr1">.false.</config_AM_mixedLayerDepths_enable>
 <config_AM_mixedLayerDepths_compute_interval>'dt'</config_AM_mixedLayerDepths_compute_interval>
 <config_AM_mixedLayerDepths_output_stream>'mixedLayerDepthsOutput'</config_AM_mixedLayerDepths_output_stream>
 <config_AM_mixedLayerDepths_write_on_startup>.false.</config_AM_mixedLayerDepths_write_on_startup>
@@ -1279,6 +1293,7 @@
 
 <!-- AM_pointwiseStats -->
 <config_AM_pointwiseStats_enable>.false.</config_AM_pointwiseStats_enable>
+<config_AM_pointwiseStats_enable ocn_grid="MAB45to5rr1">.true.</config_AM_pointwiseStats_enable>
 <config_AM_pointwiseStats_compute_interval>'output_interval'</config_AM_pointwiseStats_compute_interval>
 <config_AM_pointwiseStats_output_stream>'pointwiseStatsOutput'</config_AM_pointwiseStats_output_stream>
 <config_AM_pointwiseStats_compute_on_startup>.true.</config_AM_pointwiseStats_compute_on_startup>
@@ -1379,6 +1394,7 @@
 
 <!-- AM_oceanHeatContent -->
 <config_AM_oceanHeatContent_enable>.true.</config_AM_oceanHeatContent_enable>
+<config_AM_oceanHeatContent_enable ocn_grid="MAB45to5rr1">.false.</config_AM_oceanHeatContent_enable>
 <config_AM_oceanHeatContent_compute_interval>'0000-00-00_01:00:00'</config_AM_oceanHeatContent_compute_interval>
 <config_AM_oceanHeatContent_output_stream>'oceanHeatContentOutput'</config_AM_oceanHeatContent_output_stream>
 <config_AM_oceanHeatContent_compute_on_startup>.true.</config_AM_oceanHeatContent_compute_on_startup>
@@ -1386,6 +1402,7 @@
 
 <!-- AM_mixedLayerHeatBudget -->
 <config_AM_mixedLayerHeatBudget_enable>.true.</config_AM_mixedLayerHeatBudget_enable>
+<config_AM_mixedLayerHeatBudget_enable ocn_grid="MAB45to5rr1">.false.</config_AM_mixedLayerHeatBudget_enable>
 <config_AM_mixedLayerHeatBudget_compute_interval>'0000-00-00_01:00:00'</config_AM_mixedLayerHeatBudget_compute_interval>
 <config_AM_mixedLayerHeatBudget_output_stream>'mixedLayerHeatBudgetOutput'</config_AM_mixedLayerHeatBudget_output_stream>
 <config_AM_mixedLayerHeatBudget_compute_on_startup>.false.</config_AM_mixedLayerHeatBudget_compute_on_startup>
