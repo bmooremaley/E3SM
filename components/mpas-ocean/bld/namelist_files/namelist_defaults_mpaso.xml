@@ -415,6 +415,7 @@
 <config_sgr_temperature_prescribed>0.0</config_sgr_temperature_prescribed>
 <config_sgr_salinity_prescribed>0.0</config_sgr_salinity_prescribed>
 <config_use_atmospheric_forcing_ramp>.false.</config_use_atmospheric_forcing_ramp>
+<config_use_atmospheric_forcing_ramp ocn_grid="MAB45to5rr1">.true.</config_use_atmospheric_forcing_ramp>
 <config_atmospheric_forcing_ramp>10.0</config_atmospheric_forcing_ramp>
 <config_atmospheric_forcing_ramp_delay>0.0</config_atmospheric_forcing_ramp_delay>
 
@@ -452,6 +453,7 @@
 <config_use_parallel_self_attraction_loading>.false.</config_use_parallel_self_attraction_loading>
 <config_use_parallel_self_attraction_loading ocn_grid="MAB45to5rr1">.true.</config_use_parallel_self_attraction_loading>
 <config_parallel_self_attraction_loading_order>10</config_parallel_self_attraction_loading_order>
+<config_parallel_self_attraction_loading_order ocn_grid="MAB45to5rr1">50</config_parallel_self_attraction_loading_order>
 <config_parallel_self_attraction_loading_n_cells_per_block>600</config_parallel_self_attraction_loading_n_cells_per_block>
 <config_parallel_self_attraction_loading_bfb>.true.</config_parallel_self_attraction_loading_bfb>
 
@@ -459,6 +461,7 @@
 <config_use_tidal_potential_forcing>.false.</config_use_tidal_potential_forcing>
 <config_use_tidal_potential_forcing ocn_grid="MAB45to5rr1">.true.</config_use_tidal_potential_forcing>
 <config_tidal_potential_reference_time>'0001-01-01_00:00:00'</config_tidal_potential_reference_time>
+<config_tidal_potential_reference_time ocn_grid="MAB45to5rr1">'2011-01-01_01:00:00'</config_tidal_potential_reference_time>
 <config_use_tidal_potential_forcing_M2>.true.</config_use_tidal_potential_forcing_M2>
 <config_use_tidal_potential_forcing_S2>.true.</config_use_tidal_potential_forcing_S2>
 <config_use_tidal_potential_forcing_N2>.true.</config_use_tidal_potential_forcing_N2>
@@ -1250,6 +1253,7 @@
 
 <!-- AM_pointwiseStats -->
 <config_AM_pointwiseStats_enable>.false.</config_AM_pointwiseStats_enable>
+<config_AM_pointwiseStats_enable ocn_grid="MAB45to5rr1">.true.</config_AM_pointwiseStats_enable>
 <config_AM_pointwiseStats_compute_interval>'output_interval'</config_AM_pointwiseStats_compute_interval>
 <config_AM_pointwiseStats_output_stream>'pointwiseStatsOutput'</config_AM_pointwiseStats_output_stream>
 <config_AM_pointwiseStats_compute_on_startup>.true.</config_AM_pointwiseStats_compute_on_startup>
