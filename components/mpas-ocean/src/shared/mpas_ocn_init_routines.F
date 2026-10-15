@@ -118,6 +118,8 @@ contains
 
       real (kind=RKIND), dimension(:), pointer :: ssh
 
+      real (kind=RKIND), dimension(:), pointer :: sshResting
+
       real (kind=RKIND), dimension(:,:,:), pointer :: activeTracers
 
       type (mpas_pool_iterator_type) :: groupItr
@@ -144,6 +146,7 @@ contains
       call mpas_pool_get_array(forcingPool, 'seaIcePressure', seaIcePressure)
       call mpas_pool_get_array(forcingPool, 'atmosphericPressure', atmosphericPressure)
       call mpas_pool_get_array(forcingPool, 'frazilSurfacePressure', frazilSurfacePressure)
+      call mpas_pool_get_array(forcingPool, 'sshResting', sshResting)
 
       call mpas_pool_get_array(tracersPool, 'activeTracers', activeTracers, 1)
 
@@ -152,6 +155,9 @@ contains
             boundaryLayerDepth(iCell) = layerThickness(minLevelCell(iCell), iCell) * 0.5_RKIND
             indMLD(iCell) = minLevelCell(iCell)
          end do
+         if (associated(sshResting)) then
+            sshResting(:) = ssh(:)
+         end if
       end if
 
 #ifdef MPAS_OPENACC
