@@ -403,7 +403,7 @@ contains
        windStressZonal(iCell) =  rhoAir * windSpeedU(iCell) * windSpeedMagnitude(iCell) * windStressCoefficient
        windStressMeridional(iCell) = rhoAir * windSpeedV(iCell) * windSpeedMagnitude(iCell) * windStressCoefficient
 
-       atmosphericPressure(iCell) = ((1.0_RKIND-ramp)*atm_ref_pressure + ramp*atmosPressure(iCell)) - atm_ref_pressure
+       atmosphericPressure(iCell) = (1.0_RKIND-ramp)*atm_ref_pressure + ramp*atmosPressure(iCell)
 
     enddo
     !$omp end do

@@ -2339,6 +2339,7 @@
 			<var name="gotmDissTopOfCell"/>
 			<var name="gotmLengthTopOfCell"/>
 			<var name="pgf_sal"/>
+			<var name="sshResting" packages="tidalPotentialForcingPKG"/>
 	 		<var name="nAccumulatedRemovedIceRunoff" packages="scaledDISMFPKG"/>
 			<var name="avgRemovedIceRunoff" packages="scaledDISMFPKG"/>
 			<var name="totalRemovedIceRunoffHistory" packages="scaledDISMFPKG"/>
@@ -4606,6 +4607,10 @@
 		/>
 		<var name="coastalSmoothingFactor" type="real" dimensions="nCells" units="1"
 			 description="Multiplication factors to smooth ssh at coastlines for SAL caculation"
+			 packages="tidalPotentialForcingPKG"
+		/>
+		<var name="sshResting" type="real" dimensions="nCells" units="m"
+			 description="Sea surface height from initial conditions, used as a static reference for tidal potential forcing."
 			 packages="tidalPotentialForcingPKG"
 		/>
 		<var name="forcingTimeIncrement" type="real" dimensions="" units="s"

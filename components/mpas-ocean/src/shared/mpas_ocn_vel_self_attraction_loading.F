@@ -164,7 +164,8 @@ contains
 
         integer :: iCell
         real (kind=RKIND) :: rho0gInv
-        
+        real (kind=RKIND), dimension(:), pointer :: sshResting
+
         call mpas_timer_start('SAL Calculation')
 
         err = 0
@@ -175,10 +176,13 @@ contains
 
         rho0gInv = 1.0_RKIND / rho_sw / gravity
 
+        call mpas_pool_get_array(forcingPool, 'sshResting', sshResting)
+
         do iCell = 1,nCellsAll
           ! compute SAL wrt. the full barotropic bottom pressure
-          btrPressure(iCell) = coastalSmoothingFactor(iCell) * ( &
-              ssh(iCell) + rho0gInv * surfacePressure(iCell) )
+          btrPressure(iCell) = coastalSmoothingFactor(iCell) * &
+              (ssh(iCell) - sshResting(iCell) + &
+              rho0gInv * (surfacePressure(iCell) - atm_ref_pressure))
         enddo
 
         if (.not. config_use_parallel_self_attraction_loading) then
