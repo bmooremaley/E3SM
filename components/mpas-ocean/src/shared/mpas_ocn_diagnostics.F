@@ -173,7 +173,6 @@ contains
       call mpas_pool_get_array(statePool, 'normalVelocity', normalVelocity, timeLevel)
       call mpas_pool_get_array(statePool, 'ssh', ssh, timeLevel)
 
-      call mpas_pool_get_array(forcingPool, 'seaIcePressure', seaIcePressure)
       call mpas_pool_get_array(forcingPool, 'atmosphericPressure', atmosphericPressure)
       call mpas_pool_get_array(forcingPool, 'frazilSurfacePressure', frazilSurfacePressure)
       call mpas_pool_get_array(verticalMeshPool, 'restingThickness', restingThickness)
@@ -348,7 +347,7 @@ contains
       ! inputs: atmosphericPressure, seaIcePressure, frazilSurfacePressure, landIcePressure
       ! outputs: surfacePressure
       call ocn_diagnostic_solve_surface_pressure(forcingPool, atmosphericPressure, &
-                seaIcePressure, surfacePressure)
+                surfacePressure)
 
 
       !
@@ -487,11 +486,11 @@ contains
          ! inputs: ssh, seaIcePressure, landIceDraftForSsh
          ! outputs: pressureAdjustedSSH, gradSSH
          if (landIcePressureOn) then
-            call ocn_diagnostic_solve_ssh(forcingPool, ssh, seaIcePressure, &
+            call ocn_diagnostic_solve_ssh(forcingPool, ssh, &
                    atmosphericPressure, pressureAdjustedSSH, gradSSH, &
                    landIceDraftForSsh=landIceDraftForSsh )
         else
-            call ocn_diagnostic_solve_ssh(forcingPool, ssh, seaIcePressure, &
+            call ocn_diagnostic_solve_ssh(forcingPool, ssh, &
                    atmosphericPressure, pressureAdjustedSSH, gradSSH)
          end if
 
@@ -2612,7 +2611,7 @@ contains
 !-----------------------------------------------------------------------
 
    subroutine ocn_diagnostic_solve_surface_pressure(forcingPool, &
-               atmosphericPressure, seaIcePressure, surfacePressure)!{{{
+               atmosphericPressure, surfacePressure)!{{{
 
       !-----------------------------------------------------------------
       ! input variables
@@ -2622,8 +2621,7 @@ contains
          forcingPool         !< [in] Forcing information
 
       real (kind=RKIND), dimension(:), intent(in) :: &
-         atmosphericPressure, &!< [in] atmospheric pressure on surface
-         seaIcePressure        !< [in] sea-ice pressure on surface
+         atmosphericPressure   !< [in] atmospheric pressure on surface
 
       !-----------------------------------------------------------------
       ! output variables
@@ -2640,6 +2638,7 @@ contains
 
       real (kind=RKIND), dimension(:), pointer :: &
          frazilSurfacePressure, &! frazil ice pressure from forcing
+         seaIcePressure,        &! sea-ice pressure from forcing
          landIcePressure         ! land ice pressure
 
       ! End preamble
@@ -2650,6 +2649,10 @@ contains
       !
       call mpas_pool_get_array(forcingPool, 'frazilSurfacePressure', &
                                              frazilSurfacePressure)
+      if (config_use_sea_ice_coupling) then
+         call mpas_pool_get_array(forcingPool, 'seaIcePressure', &
+                                               seaIcePressure)
+      end if
       call mpas_pool_get_array(forcingPool, 'landIcePressure', &
                                              landIcePressure)
 
@@ -2660,20 +2663,35 @@ contains
 
 #ifdef MPAS_OPENACC
       !$acc parallel loop &
-      !$acc    present(surfacePressure, atmosphericPressure, &
-      !$acc            seaIcePressure)
+      !$acc    present(surfacePressure, atmosphericPressure)
 #else
       !$omp parallel
       !$omp do schedule(runtime)
 #endif
       do iCell = 1, nCellsAll
-
-         surfacePressure(iCell) = atmosphericPressure(iCell) &
-                                + seaIcePressure(iCell)
+         surfacePressure(iCell) = atmosphericPressure(iCell)
       end do
 #ifndef MPAS_OPENACC
       !$omp end do
 #endif
+
+      ! Add sea ice component if needed
+      if (config_use_sea_ice_coupling) then
+
+#ifdef MPAS_OPENACC
+         !$acc parallel loop &
+         !$acc    present(surfacePressure, seaIcePressure)
+#else
+         !$omp do schedule(runtime)
+#endif
+         do iCell = 1, nCellsAll
+            surfacePressure(iCell) = surfacePressure(iCell) &
+                                   + seaIcePressure(iCell)
+         end do
+#ifndef MPAS_OPENACC
+         !$omp end do
+#endif
+      endif ! sea ice pressure
 
       ! Add frazil component if needed
       if ( associated(frazilSurfacePressure) ) then
@@ -2984,7 +3002,7 @@ contains
 !>  This routine computes the diagnostic variables for pressureAdjustedSSH and gradSSH
 !
 !-----------------------------------------------------------------------
-   subroutine ocn_diagnostic_solve_ssh(forcingPool, ssh, seaIcePressure, &
+   subroutine ocn_diagnostic_solve_ssh(forcingPool, ssh, &
                 atmosphericPressure, pressureAdjustedSSH, gradSSH, &
                 landIceDraftForSsh)!{{{
 
@@ -2999,8 +3017,6 @@ contains
       type (mpas_pool_type), intent(in) :: forcingPool !< Input: Forcing information
       real (kind=RKIND), dimension(:), intent(in) :: &
          ssh
-      real (kind=RKIND), dimension(:), intent(in) :: &
-         seaIcePressure
       real (kind=RKIND), dimension(:), intent(in) :: &
          atmosphericPressure
       real (kind=RKIND), dimension(:), optional, intent(in) :: &
@@ -3026,25 +3042,44 @@ contains
       integer :: nCells, nEdges
       integer :: iCell, iEdge
       integer :: cell1, cell2
+      real (kind=RKIND), dimension(:), pointer :: seaIcePressure
 
       nCells = nCellsHalo( 1 )
+      if (config_use_sea_ice_coupling) then
+         call mpas_pool_get_array(forcingPool, 'seaIcePressure', seaIcePressure)
+      end if
 #ifdef MPAS_OPENACC
-      !$acc parallel loop present(seaIcePressure, atmosphericPressure, &
-      !$acc                       pressureAdjustedSSH, ssh)
+      !$acc parallel loop present(atmosphericPressure, pressureAdjustedSSH, ssh)
 #else
       !$omp parallel
       !$omp do schedule(runtime)
 #endif
       do iCell = 1, nCells
          pressureAdjustedSSH(iCell) = ssh(iCell) + ( &
-            (seaIcePressure(iCell) + atmosphericPressure(iCell)) / &
-            ( gravity * rho_sw ) &
+            atmosphericPressure(iCell) / ( gravity * rho_sw ) &
          )
       end do
 #ifndef MPAS_OPENACC
       !$omp end do
       !$omp end parallel
 #endif
+      if (config_use_sea_ice_coupling) then
+#ifdef MPAS_OPENACC
+         !$acc parallel loop present(seaIcePressure, pressureAdjustedSSH)
+#else
+         !$omp parallel
+         !$omp do schedule(runtime)
+#endif
+         do iCell = 1, nCells
+            pressureAdjustedSSH(iCell) = pressureAdjustedSSH(iCell) + ( &
+               seaIcePressure(iCell) / ( gravity * rho_sw ) &
+            )
+         end do
+#ifndef MPAS_OPENACC
+         !$omp end do
+         !$omp end parallel
+#endif
+      end if
 
       if (landIcePressureOn) then
 #ifdef MPAS_OPENACC

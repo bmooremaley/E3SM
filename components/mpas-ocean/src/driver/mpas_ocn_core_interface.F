@@ -123,6 +123,7 @@ module ocn_core_interface
       logical, pointer :: dataLandIceFluxesPKGActive
       logical, pointer :: landIceFluxesPKGActive
       logical, pointer :: landIceCouplingPKGActive
+      logical, pointer :: seaIceCouplingPKGActive
       logical, pointer :: landIceThermalForcing3DPKGActive
       logical, pointer :: dataSubglacialRunoffFluxPKGActive
       logical, pointer :: thicknessBulkPKGActive
@@ -165,6 +166,7 @@ module ocn_core_interface
       logical, pointer :: config_use_tracerGroup_ttd_forcing
 
       logical, pointer :: config_use_freq_filtered_thickness
+      logical, pointer :: config_use_sea_ice_coupling
       logical, pointer :: config_use_frazil_ice_formation
       logical, pointer :: config_use_tidal_forcing
       logical, pointer :: config_use_self_attraction_loading
@@ -348,6 +350,15 @@ module ocn_core_interface
       call mpas_pool_get_config(configPool, 'config_subglacial_runoff_mode', config_subglacial_runoff_mode)
       if ( trim(config_subglacial_runoff_mode) == 'data' ) then
          dataSubglacialRunoffFluxPKGActive = .true.
+      end if
+
+      !
+      ! test for sea ice coupling, seaIceCouplingPKG
+      !
+      call mpas_pool_get_package(packagePool, 'seaIceCouplingPKGActive', seaIceCouplingPKGActive)
+      call mpas_pool_get_config(configPool, 'config_use_sea_ice_coupling', config_use_sea_ice_coupling)
+      if (config_use_sea_ice_coupling) then
+         seaIceCouplingPKGActive = .true.
       end if
 
       !
