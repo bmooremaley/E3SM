@@ -936,6 +936,10 @@
 					description="If and how MPAS-Ocean sends thermal forcing to GLC (MALI) in E3SM.  This is used for ocean coupling with a melt parameterization for grounded marine ice-cliffs in MALI.  This is primarily relevant to the Greenland Ice Sheet, but also relevant to the Antarctic Ice Sheet. 'none' means no coupling of thermal forcing. '3d' means thermal forcing is passed at multiple z-levels."
 					possible_values="'off', '3d'"
 		/>
+		<nml_option name="config_use_sea_ice_coupling" type="logical" default_value=".true."
+					description="Flag for sea ice coupling. Controls allocation of sea ice coupling arrays. Set to .false. when using stub sea ice (SICE)."
+					possible_values=".true. or .false."
+		/>
 	</nml_record>
 	<nml_record name="shortwaveRadiation" mode="init;forward">
 		<nml_option name="config_sw_absorption_type" type="character" default_value="none"
@@ -1967,6 +1971,7 @@
 		<package name="landIceFluxesPKG" description="This package includes varibles required for land ice thickness, momentum and tracer fluxes."/>
 		<package name="dataSubglacialRunoffFluxPKG" description="This package includes variables required for prescribed subglacial runoff flux at the grounding line into the ocean."/>
 		<package name="landIceCouplingPKG" description="This package includes varibles required for land ice coupling but not land ice fluxes in standalone mode."/>
+		<package name="seaIceCouplingPKG" description="This package includes variables required for sea ice coupling."/>
 		<package name="landIceThermalForcing3DPKG" description="This package includes varibles required for passing a 3D thermal forcing field interpolated to z-levels to glc."/>
 		<package name="dataLandIceFluxesPKG" description="This package includes varibles related to prescribed freshwater and heat fluxes from land ice."/>
 		<package name="frazilIce" description="This package includes variables required for frazil ice formation."/>
@@ -4083,6 +4088,7 @@
 			 ********************************************************************* -->
 		<var name="seaIcePressure" type="real" dimensions="nCells Time" units="Pa"
 			 description="Pressure at the sea surface due to sea ice."
+			 packages="seaIceCouplingPKG"
 		/>
 		<var name="atmosphericPressure" type="real" dimensions="nCells Time" units="Pa"
 			 description="Pressure at the sea surface due to the atmosphere."
@@ -4166,9 +4172,11 @@
 		/>
 		<var name="seaIceFreshWaterFlux" type="real" dimensions="nCells Time" units="kg m^-2 s^-1"
 			 description="Fresh water flux from sea ice at cell centers from coupler. Positive into the ocean."
+			 packages="seaIceCouplingPKG"
 		/>
 		<var name="icebergFreshWaterFlux" type="real" dimensions="nCells Time" units="kg m^-2 s^-1"
 			 description="Fresh water flux from iceberg melt at cell centers from coupler. Positive into the ocean."
+			 packages="seaIceCouplingPKG"
 		/>
 		<var name="riverRunoffFlux" type="real" dimensions="nCells Time" units="kg m^-2 s^-1"
 			 description="Fresh water flux from river runoff at cell centers from coupler. Positive into the ocean."
@@ -4262,6 +4270,7 @@
 		<!-- Misc. coupling fields -->
 		<var name="iceFraction" type="real" dimensions="nCells Time" units="fractional"
 			 description="Fraction of sea ice coverage at cell centers from coupler. Positive into the ocean."
+			 packages="seaIceCouplingPKG"
 		/>
 		<var name="windSpeed10m" type="real" dimensions="nCells Time" units="m s^-1"
 			 description="Wind speed at 10 meter."

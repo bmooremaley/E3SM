@@ -463,6 +463,8 @@
 <config_ais_ice_runoff_history_days>731</config_ais_ice_runoff_history_days>
 <config_n_glc_z_levels>0</config_n_glc_z_levels>
 <config_glc_thermal_forcing_coupling_mode>'off'</config_glc_thermal_forcing_coupling_mode>
+<config_use_sea_ice_coupling>.true.</config_use_sea_ice_coupling>
+<config_use_sea_ice_coupling ocn_grid="MAB45to5rr1">.false.</config_use_sea_ice_coupling>
 
 <!-- shortwaveRadiation -->
 <config_sw_absorption_type>'jerlov'</config_sw_absorption_type>

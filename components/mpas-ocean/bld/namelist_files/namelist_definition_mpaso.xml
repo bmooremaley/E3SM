@@ -1520,6 +1520,14 @@ Valid values: 'off', '3d'
 Default: Defined in namelist_defaults.xml
 </entry>
 
+<entry id="config_use_sea_ice_coupling" type="logical"
+	category="coupling" group="coupling">
+Flag for sea ice coupling. Controls allocation of sea ice coupling arrays. Set to .false. when using stub sea ice (SICE).
+
+Valid values: .true. or .false.
+Default: Defined in namelist_defaults.xml
+</entry>
+
 
 <!-- shortwaveRadiation -->
 

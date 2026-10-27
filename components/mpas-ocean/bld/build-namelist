@@ -799,6 +799,7 @@ if ($GLC_NZOC gt 0) {
 } else {
     add_default($nl, 'config_glc_thermal_forcing_coupling_mode');
 }
+add_default($nl, 'config_use_sea_ice_coupling');
 
 ######################################
 # Namelist group: shortwaveRadiation #
