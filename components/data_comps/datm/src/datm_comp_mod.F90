@@ -1227,7 +1227,6 @@ CONTAINS
        lsize = mct_avect_lsize(a2x)
        do n = 1,lsize
           a2x%rAttr(kz,n)    = 10.0_R8                ! 10m reference height
-          a2x%rAttr(kpslv,n) = a2x%rAttr(kpbot,n)     ! pslv = pbot for consistency
           a2x%rAttr(krl,n)   = avstrm%rAttr(sprec,n)  ! all precip as large-scale rain
           a2x%rAttr(krc,n)   = 0.0_R8                 ! no convective rain
           a2x%rAttr(ksc,n)   = 0.0_R8                 ! no convective snow

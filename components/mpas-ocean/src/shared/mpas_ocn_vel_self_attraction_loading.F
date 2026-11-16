@@ -32,6 +32,7 @@ module ocn_vel_self_attraction_loading
     use ocn_constants
     use ocn_diagnostics
     use ocn_diagnostics_variables
+    use ocn_surface_land_ice_fluxes, only: landIcePressureOn
     use ocn_config
     use ocn_mesh
     use netcdf
@@ -163,8 +164,9 @@ contains
         !-----------------------------------------------------------------
 
         integer :: iCell
-        real (kind=RKIND) :: rho0gInv
+        real (kind=RKIND) :: rho0gInv, surfacePressureCell
         real (kind=RKIND), dimension(:), pointer :: sshResting
+        real (kind=RKIND), dimension(:), pointer :: landIcePressure
 
         call mpas_timer_start('SAL Calculation')
 
@@ -177,12 +179,20 @@ contains
         rho0gInv = 1.0_RKIND / rho_sw / gravity
 
         call mpas_pool_get_array(forcingPool, 'sshResting', sshResting)
+        if (landIcePressureOn) then
+            call mpas_pool_get_array(forcingPool, 'landIcePressure', landIcePressure)
+        endif
 
         do iCell = 1,nCellsAll
-          ! compute SAL wrt. the full barotropic bottom pressure
+          ! exclude static landIcePressure from btrPressure since it is
+          ! already in balance with the initial ssh
+          if (landIcePressureOn) then
+              surfacePressureCell = surfacePressure(iCell) - landIcePressure(iCell)
+          else
+              surfacePressureCell = surfacePressure(iCell)
+          endif
           btrPressure(iCell) = coastalSmoothingFactor(iCell) * &
-              (ssh(iCell) - sshResting(iCell) + &
-              rho0gInv * (surfacePressure(iCell) - atm_ref_pressure))
+              (ssh(iCell) - sshResting(iCell) + rho0gInv * surfacePressureCell)
         enddo
 
         if (.not. config_use_parallel_self_attraction_loading) then
@@ -705,6 +715,7 @@ contains
         else
           call mpas_add_clock_alarm(domain % clock, 'salComputeAlarm', alarmTime, &
                 alarmTimeInterval=alarmTimeStep, ierr=err)
+          call mpas_reset_clock_alarm(domain % clock, 'salComputeAlarm', ierr=err)
         endif
 
         if (.not. config_use_parallel_self_attraction_loading) then

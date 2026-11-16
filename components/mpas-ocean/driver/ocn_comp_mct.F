@@ -70,6 +70,7 @@ module ocn_comp_mct
    use ocn_eddy_parameterization_helpers
    use ocn_scaled_dismf
    use ocn_scaled_sfwf
+   use ocn_tidal_forcing
 !
 ! !PUBLIC MEMBER FUNCTIONS:
   implicit none
@@ -1198,6 +1199,8 @@ contains
             call mpas_timer_stop("land_ice_build_arrays")
             call ocn_surface_land_ice_fluxes_accumulate_fluxes(meshPool, forcingPool, &
                                                                statePool, dt, ierr)
+
+            call ocn_tidal_forcing_build_array(domain, meshPool, forcingPool, statePool, ierr)
 
             call ocn_eddy_compute_mixed_layer_depth(statePool, forcingPool)
             if (config_use_GM .or. config_submesoscale_enable) then
@@ -2806,10 +2809,10 @@ contains
               windStressMeridional(i) = ramp*windStressMeridional(i)
            endif
            if ( atmosphericPressureField % isActive ) then
-              atmosphericPressure(i) = (1.0_RKIND-ramp)*atm_ref_pressure + ramp*atmosphericPressure(i)
+              atmosphericPressure(i) = ramp * (atmosphericPressure(i) - atm_ref_pressure)
            endif
            if ( rainFluxField % isActive ) then
-              rainFlux(i) = ramp*rainFlux(i)
+              rainFlux(i) = 0.0_RKIND !ramp*rainFlux(i)
            endif
         end if
 

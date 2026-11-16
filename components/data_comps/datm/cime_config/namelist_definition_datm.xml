@@ -483,7 +483,7 @@
       <value stream="presaero.SSP5-8.5">aerodep_clm_SSP585_b.e21.BSSP585cmip6.f09_g17.CMIP6-SSP5-8.5.001_2014-2101_monthly_0.9x1.25_c190419.nc</value>
       <value stream="topo.observed">topodata_0.9x1.25_USGS_070110_stream_c151201.nc</value>
       <value stream="topo.cplhist">null</value>
-      <value stream="CFSv2.*">domain.T574.20260910.nc</value>
+      <value stream="CFSv2.*">domain.T574.20261110.nc</value>
       <value stream="CFSR.*">null</value>
       <value stream="topo.e3smwcv2">null</value>
       <value stream="topo.cplwch">null</value>
@@ -1603,42 +1603,42 @@
         prate.cdas1.201312.grb2.nc
       </value>
       <value stream="CFSv2.NCEP.PRESSFC">
-        pressfc.gdas.201101.grb2.nc
-        pressfc.gdas.201102.grb2.nc
-        pressfc.gdas.201103.grb2.nc
-        pressfc.cdas1.201104.grb2.nc
-        pressfc.cdas1.201105.grb2.nc
-        pressfc.cdas1.201106.grb2.nc
-        pressfc.cdas1.201107.grb2.nc
-        pressfc.cdas1.201108.grb2.nc
-        pressfc.cdas1.201109.grb2.nc
-        pressfc.cdas1.201110.grb2.nc
-        pressfc.cdas1.201111.grb2.nc
-        pressfc.cdas1.201112.grb2.nc
-        pressfc.cdas1.201201.grb2.nc
-        pressfc.cdas1.201202.grb2.nc
-        pressfc.cdas1.201203.grb2.nc
-        pressfc.cdas1.201204.grb2.nc
-        pressfc.cdas1.201205.grb2.nc
-        pressfc.cdas1.201206.grb2.nc
-        pressfc.cdas1.201207.grb2.nc
-        pressfc.cdas1.201208.grb2.nc
-        pressfc.cdas1.201209.grb2.nc
-        pressfc.cdas1.201210.grb2.nc
-        pressfc.cdas1.201211.grb2.nc
-        pressfc.cdas1.201212.grb2.nc
-        pressfc.cdas1.201301.grb2.nc
-        pressfc.cdas1.201302.grb2.nc
-        pressfc.cdas1.201303.grb2.nc
-        pressfc.cdas1.201304.grb2.nc
-        pressfc.cdas1.201305.grb2.nc
-        pressfc.cdas1.201306.grb2.nc
-        pressfc.cdas1.201307.grb2.nc
-        pressfc.cdas1.201308.grb2.nc
-        pressfc.cdas1.201309.grb2.nc
-        pressfc.cdas1.201310.grb2.nc
-        pressfc.cdas1.201311.grb2.nc
-        pressfc.cdas1.201312.grb2.nc
+        prmsl.gdas.201101.grb2.nc
+        prmsl.gdas.201102.grb2.nc
+        prmsl.gdas.201103.grb2.nc
+        prmsl.cdas1.201104.grb2.nc
+        prmsl.cdas1.201105.grb2.nc
+        prmsl.cdas1.201106.grb2.nc
+        prmsl.cdas1.201107.grb2.nc
+        prmsl.cdas1.201108.grb2.nc
+        prmsl.cdas1.201109.grb2.nc
+        prmsl.cdas1.201110.grb2.nc
+        prmsl.cdas1.201111.grb2.nc
+        prmsl.cdas1.201112.grb2.nc
+        prmsl.cdas1.201201.grb2.nc
+        prmsl.cdas1.201202.grb2.nc
+        prmsl.cdas1.201203.grb2.nc
+        prmsl.cdas1.201204.grb2.nc
+        prmsl.cdas1.201205.grb2.nc
+        prmsl.cdas1.201206.grb2.nc
+        prmsl.cdas1.201207.grb2.nc
+        prmsl.cdas1.201208.grb2.nc
+        prmsl.cdas1.201209.grb2.nc
+        prmsl.cdas1.201210.grb2.nc
+        prmsl.cdas1.201211.grb2.nc
+        prmsl.cdas1.201212.grb2.nc
+        prmsl.cdas1.201301.grb2.nc
+        prmsl.cdas1.201302.grb2.nc
+        prmsl.cdas1.201303.grb2.nc
+        prmsl.cdas1.201304.grb2.nc
+        prmsl.cdas1.201305.grb2.nc
+        prmsl.cdas1.201306.grb2.nc
+        prmsl.cdas1.201307.grb2.nc
+        prmsl.cdas1.201308.grb2.nc
+        prmsl.cdas1.201309.grb2.nc
+        prmsl.cdas1.201310.grb2.nc
+        prmsl.cdas1.201311.grb2.nc
+        prmsl.cdas1.201312.grb2.nc
       </value>
       <value stream="CFSv2.NCEP.WND10M">
         wnd10m.gdas.201101.grb2.nc
@@ -2251,7 +2251,7 @@
         PRATE_L1_Avg_1  prec
       </value>
       <value  stream="CFSv2.NCEP.PRESSFC">
-        PRES_L1  pbot
+        PRMSL_L101  pslv
       </value>
       <value  stream="CFSv2.NCEP.WND10M">
         U_GRD_L103  u
@@ -2261,7 +2261,7 @@
         PRATE_L1_Avg_1  prec
       </value>
       <value  stream="CFSR.NCEP.PRESSFC">
-        PRES_L1  pbot
+        PRMSL_L101  pslv
       </value>
       <value  stream="CFSR.NCEP.WND10M">
         U_GRD_L103  u
