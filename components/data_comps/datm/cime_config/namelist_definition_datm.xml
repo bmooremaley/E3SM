@@ -483,7 +483,7 @@
       <value stream="presaero.SSP5-8.5">aerodep_clm_SSP585_b.e21.BSSP585cmip6.f09_g17.CMIP6-SSP5-8.5.001_2014-2101_monthly_0.9x1.25_c190419.nc</value>
       <value stream="topo.observed">topodata_0.9x1.25_USGS_070110_stream_c151201.nc</value>
       <value stream="topo.cplhist">null</value>
-      <value stream="CFSv2.*">domain.T574.20261110.nc</value>
+      <value stream="CFSv2.*">domain.T574.20261117.nc</value>
       <value stream="CFSR.*">null</value>
       <value stream="topo.e3smwcv2">null</value>
       <value stream="topo.cplwch">null</value>

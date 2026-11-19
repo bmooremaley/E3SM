@@ -85,6 +85,10 @@ def buildnml(case, caseroot, compname):
     eco_forcing_file = ''
     u_tidal_rms_file = ''
     data_sgr_file = ''
+    point_stats_file = ''
+    topo_wave_drag_file = ''
+    use_subgrid_wetting_and_drying = False
+    use_variable_bottom_drag = False
 
     if ocn_grid == 'oEC60to30v3':
         decomp_date = '230424'
@@ -490,11 +494,14 @@ def buildnml(case, caseroot, compname):
             ic_prefix = 'mpaso.u05-oi6to18.rstFromG-chrysalis'
 
     elif ocn_grid == 'MAB45to5rr1':
-        decomp_date = '20260922'
+        decomp_date = '20261117'
         decomp_prefix = 'partitions/mpas-o.graph.info.'
-        ic_date = '20260922'
+        ic_date = '20261117'
         ic_prefix = 'mpaso.MAB45to5rr1'
-        # No restoring_file: barotropic mesh, tracers are not evolved
+        point_stats_file = 'pointstats.MAB45to5rr1.20261117.nc'
+        topo_wave_drag_file = 'topographicwavedrag.MAB45to5rr1.20261117.nc'
+        use_subgrid_wetting_and_drying = True
+        use_variable_bottom_drag = True
 
     #--------------------------------------------------------------------
     # Set OCN_FORCING = datm_forced_restoring if restoring file is available
@@ -537,6 +544,12 @@ def buildnml(case, caseroot, compname):
 
         if data_sgr_file != '':
             input_list.write("subglacial_runoff = {}/ocn/mpas-o/{}/{}\n".format(din_loc_root, ocn_mask, data_sgr_file))
+
+        if point_stats_file != '':
+            input_list.write("point_stats = {}/ocn/mpas-o/{}/{}\n".format(din_loc_root, ocn_mask, point_stats_file))
+
+        if topo_wave_drag_file != '':
+            input_list.write("topo_wave_drag = {}/ocn/mpas-o/{}/{}\n".format(din_loc_root, ocn_mask, topo_wave_drag_file))
 
     #--------------------------------------------------------------------
     # Invoke mpas build-namelist - output will go in $CASEBUILD/mpasoconf
@@ -1871,6 +1884,95 @@ def buildnml(case, caseroot, compname):
                 lines.append('    <var name="dataLandIceFreshwaterFlux"/>')
                 lines.append('    <var name="dataLandIceHeatFlux"/>')
                 lines.append('    <var name="areaIntegAnnMeanDataIcebergIceShelfFreshwaterFlux"/>')
+                lines.append('</stream>')
+                lines.append('')
+
+            if use_subgrid_wetting_and_drying:
+                lines.append('<stream name="subgrid_tables"')
+                lines.append('        type="input"')
+                lines.append('        io_type="{}"'.format(io_type_str))
+                lines.append('        filename_template="{}/ocn/mpas-o/{}/{}.{}.nc"'.format(din_loc_root, ocn_mask, ic_prefix, ic_date))
+                lines.append('        input_interval="initial_only"')
+                lines.append('        packages="subgridWetDryPKG">')
+                lines.append('')
+                lines.append('        <var name="subgridWetVolumeCellTable"/>')
+                lines.append('        <var name="subgridWetVolumeEdgeTable"/>')
+                lines.append('        <var name="subgridWetVolumeVertexTable"/>')
+                lines.append('        <var name="subgridWetFractionCellTable"/>')
+                lines.append('        <var name="subgridWetFractionEdgeTable"/>')
+                lines.append('        <var name="subgridWetFractionVertexTable"/>')
+                lines.append('        <var name="subgridSshCellTableRange"/>')
+                lines.append('        <var name="subgridSshEdgeTableRange"/>')
+                lines.append('        <var name="subgridSshVertexTableRange"/>')
+                lines.append('        <var name="subgridEdgeBathymetryMean"/>')
+                lines.append('        <var name="subgridVertexBathymetryMean"/>')
+                lines.append('        <var name="subgridCellBathymetryMin"/>')
+                lines.append('        <var name="subgridEdgeBathymetryMin"/>')
+                lines.append('        <var name="subgridVertexBathymetryMin"/>')
+                lines.append('        <var name="subgridLayerThicknessDebug"/>')
+                lines.append('        <var name="subgridSshDragEdgeTableRange"/>')
+                lines.append('        <var name="subgridDragEdgeTable"/>')
+                lines.append('        <var name="subgridEdgeArea"/>')
+                lines.append('</stream>')
+                lines.append('')
+
+            if use_variable_bottom_drag:
+                lines.append('<stream name="variable_bottom_drag"')
+                lines.append('        type="input"')
+                lines.append('        io_type="{}"'.format(io_type_str))
+                lines.append('        filename_template="{}/ocn/mpas-o/{}/{}.{}.nc"'.format(din_loc_root, ocn_mask, ic_prefix, ic_date))
+                lines.append('        input_interval="initial_only"')
+                lines.append('        packages="variableBottomDragPKG">')
+                lines.append('')
+                lines.append('        <var name="bottomDrag"/>')
+                lines.append('</stream>')
+                lines.append('')
+
+            if topo_wave_drag_file != '':
+                lines.append('<stream name="topographic_wave_drag"')
+                lines.append('        type="input"')
+                lines.append('        io_type="{}"'.format(io_type_str))
+                lines.append('        filename_template="{}/ocn/mpas-o/{}/{}"'.format(din_loc_root, ocn_mask, topo_wave_drag_file))
+                lines.append('        input_interval="initial_only"')
+                lines.append('        packages="topographicWaveDragPKG">')
+                lines.append('')
+                lines.append('        <var name="topo_buoyancy_N1V"/>')
+                lines.append('        <var name="topo_buoyancy_N1B"/>')
+                lines.append('        <var name="bathy_stddev"/>')
+                lines.append('        <var name="bed_slope_edges"/>')
+                lines.append('        <var name="latGradEdge"/>')
+                lines.append('        <var name="lonGradEdge"/>')
+                lines.append('</stream>')
+                lines.append('')
+
+            if point_stats_file != '':
+                lines.append('<stream name="pointLocationsInput"')
+                lines.append('        type="input"')
+                lines.append('        io_type="{}"'.format(io_type_str))
+                lines.append('        filename_template="{}/ocn/mpas-o/{}/{}"'.format(din_loc_root, ocn_mask, point_stats_file))
+                lines.append('        input_interval="initial_only"')
+                lines.append('        runtime_format="single_file">')
+                lines.append('')
+                lines.append('    <var name="pointCellGlobalID"/>')
+                lines.append('</stream>')
+                lines.append('')
+                lines.append('<stream name="pointwiseStatsOutput"')
+                lines.append('        type="output"')
+                lines.append('        precision="single"')
+                lines.append('        io_type="{}"'.format(io_type_str))
+                lines.append('        filename_template="{}.mpaso{}.hist.am.pointwiseStatsOutput.$Y-$M-$D.nc"'.format(casename, inst_string))
+                lines.append('        filename_interval="00-01-00_00:00:00"')
+                lines.append('        reference_time="01-01-01_00:00:00"')
+                lines.append('        output_interval="00-00-00_00:30:00"')
+                lines.append('        clobber_mode="append"')
+                lines.append('        packages="pointwiseStatsAMPKG"')
+                lines.append('        runtime_format="single_file">')
+                lines.append('')
+                lines.append('    <var name="pointCellGlobalID"/>')
+                lines.append('    <var name="xtime"/>')
+                lines.append('    <var name="latCell"/>')
+                lines.append('    <var name="lonCell"/>')
+                lines.append('    <var name="ssh"/>')
                 lines.append('</stream>')
                 lines.append('')
 

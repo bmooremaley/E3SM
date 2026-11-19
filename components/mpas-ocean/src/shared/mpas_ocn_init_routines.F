@@ -155,9 +155,6 @@ contains
             boundaryLayerDepth(iCell) = layerThickness(minLevelCell(iCell), iCell) * 0.5_RKIND
             indMLD(iCell) = minLevelCell(iCell)
          end do
-         if (associated(sshResting)) then
-            sshResting(:) = ssh(:)
-         end if
       end if
 
 #ifdef MPAS_OPENACC
@@ -216,6 +213,15 @@ contains
       endif
       !$acc exit data delete(layerThickness, normalVelocity)
 #endif
+
+      ! Set the SAL/tidal-potential reference ssh from the diagnosed initial
+      ! ssh, so it is consistent with layerThickness (including the subgrid
+      ! wetting-and-drying lookup) rather than relying on ssh from the input file
+      if (.not. config_do_restart) then
+         if (associated(sshResting)) then
+            sshResting(:) = ssh(:)
+         end if
+      end if
 
       layerThickness(:, nCells+1) = 0.0_RKIND
 
