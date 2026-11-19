@@ -2530,8 +2530,8 @@
       <value stream="CPLWCHForcing.State1hr">900</value>
       <value stream="presaero.cplwch">0</value>
       <value stream="topo.cplwch">0</value>
-      <value stream="CFSv2.*">-3600</value>
-      <value stream="CFSR.*">-3600</value>
+      <value stream="CFSv2.*">0</value>
+      <value stream="CFSR.*">0</value>
     </values>
   </entry>
 
@@ -2885,6 +2885,8 @@
       <value datm_mode="CLM1PT">extend</value>
       <value atm_grid="CLM_USRDAT">cycle</value>
       <value atm_grid="ELM_USRDAT">cycle</value>
+      <value stream="CFSv2.*">limit</value>
+      <value stream="CFSR.*">limit</value>
     </values>
   </entry>
 

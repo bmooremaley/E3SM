@@ -1,0 +1,8 @@
+This testdef starts a CMPASO-CFSv2 run on 2011-08-01 (Hurricane Irene)
+instead of the start of the CFSv2 forcing record (2011-01-01), which is
+the reference used by the compset and grid defaults.
+
+It changes three things:
+    RUN_STARTDATE (xml)                       -> 2011-08-01
+    STOP_N (xm)                               -> 30
+    config_tidal_potential_reference_time     -> '2011-08-01_00:00:00'

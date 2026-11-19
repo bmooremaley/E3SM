@@ -518,7 +518,6 @@
 <config_use_tidal_potential_forcing>.false.</config_use_tidal_potential_forcing>
 <config_use_tidal_potential_forcing ocn_grid="MAB45to5rr1">.true.</config_use_tidal_potential_forcing>
 <config_tidal_potential_reference_time>'0001-01-01_00:00:00'</config_tidal_potential_reference_time>
-<config_tidal_potential_reference_time ocn_grid="MAB45to5rr1">'2011-01-01_01:00:00'</config_tidal_potential_reference_time>
 <config_use_tidal_potential_forcing_M2>.true.</config_use_tidal_potential_forcing_M2>
 <config_use_tidal_potential_forcing_S2>.true.</config_use_tidal_potential_forcing_S2>
 <config_use_tidal_potential_forcing_N2>.true.</config_use_tidal_potential_forcing_N2>
